@@ -168,22 +168,25 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="5"
                     tools:listitem="@layout/category_item_layout" />
-                <TextView
-                    android:id="@+id/RececntJobs"
-                    android:text="Recent Jobs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/font_dark"
-                    android:layout_below="@id/recyclerCategory"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/RececntJobs"/>
             </RelativeLayout>
-
-
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category">
+            <TextView
+                android:id="@+id/RececntJobs"
+                android:text="Recent Jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/font_dark" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/RececntJobs"
+                tools:listitem="@layout/job_item_layout"/>
         </RelativeLayout>
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
