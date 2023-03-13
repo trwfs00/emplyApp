@@ -45,6 +45,16 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
+        bindingCountryActivity.btnContinue.setOnClickListener {
+            if(KEY_COUNTRY_ID != null && KEY_COUNTRY_NAME != null && KEY_USERNAME != null) {
+                val intent = Intent(applicationContext,JobseekerActivity::class.java)
+                intent.putExtra("country_id" , KEY_COUNTRY_ID)
+                intent.putExtra("country_name" , KEY_COUNTRY_NAME)
+                startActivity(intent)
+            } else {
+                Toast.makeText(applicationContext,"Please select your country",Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun onResume() {
@@ -126,19 +136,7 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
     override fun onClick(position: Int) {
         KEY_COUNTRY_ID = CountryList[position].country_id
         KEY_COUNTRY_NAME = CountryList[position].nicename
-//        val intent = Intent(this@CountryActivity,ProfileActivity::class.java)
-//        intent.putExtra("country_id" , CountryList[position].country_id)
-//        intent.putExtra("country_nname" , CountryList[position].nicename)
-//        startActivity(intent)
-    }
-
-    fun continuePage() {
-        if(KEY_COUNTRY_ID != null && KEY_COUNTRY_NAME != null && KEY_USERNAME != null) {
-            val intent = Intent(applicationContext,JobseekerActivity::class.java)
-            intent.putExtra("country_id" , KEY_COUNTRY_ID)
-            intent.putExtra("country_name" , KEY_COUNTRY_NAME)
-          startActivity(intent)
-        }
+        Toast.makeText(applicationContext,KEY_COUNTRY_NAME,Toast.LENGTH_SHORT).show()
     }
 
 }

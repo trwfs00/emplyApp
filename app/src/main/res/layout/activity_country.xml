@@ -65,6 +65,7 @@
         android:layout_alignParentBottom="true">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_centerInParent="true"
