@@ -21,6 +21,20 @@ interface UserAPI {
         @Path("password") password: String
     ): Call<LoginUserClass>
 
+    @FormUrlEncoded
+    @POST("jobseeker")
+    fun insertProfile(
+        @Field("fullName") fullName: String,
+        @Field("nickName") nickName: String,
+        @Field("birthday") birthday: String,
+        @Field("phone") phone: String,
+        @Field("gender") gender: Int,
+        @Field("email") email: String,
+        @Field("Login_id") Login_id: Int,
+        @Field("country_id") country_id: Int,
+        @Field("picture") picture: String
+    ):Call<Jobseeker>
+
     companion object
     {
         fun create():UserAPI {

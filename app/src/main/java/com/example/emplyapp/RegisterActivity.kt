@@ -28,10 +28,6 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
     }
-    fun generateUserId(): String {
-        val uuid = UUID.randomUUID().toString().replace("-", "")
-        return uuid.substring(0, 11)
-    }
 
     fun addUserJob(v: View) {
 
@@ -62,6 +58,7 @@ class RegisterActivity : AppCompatActivity() {
                         val id_back = response.body()?.Login_id.toString()
                         val username_back = response.body()?.username.toString()
                         session.createLoginSession(username_back, id_back, edtUsername)
+                        intent.putExtra("ROLE_ID" , 0)
                         var i: Intent = Intent(applicationContext, CountryActivity::class.java)
                         startActivity(i)
                         finish()
@@ -115,7 +112,7 @@ class RegisterActivity : AppCompatActivity() {
                         val id_back = response.body()?.Login_id.toString()
                         val username_back = response.body()?.username.toString()
                         session.createLoginSession(username_back, id_back, edtUsername)
-
+                        intent.putExtra("ROLE_ID" , 1)
                         var i: Intent = Intent(applicationContext, CountryActivity::class.java)
                         startActivity(i)
                         finish()

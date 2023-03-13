@@ -23,10 +23,10 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var session: SessionManager
-
     var KEY_COUNTRY_ID: Int? = null
     var KEY_COUNTRY_NAME: String? = null
     var KEY_USERNAME: String? = null
+    var KEY_ROLE: Int? = null
 
     private var CountryList = ArrayList<CountryClass>()
     val createClient = CountryAPI.create()
@@ -39,6 +39,7 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
         session = SessionManager(applicationContext)
         // Read data from the preferences
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
+        KEY_ROLE = intent.getStringExtra("ROLE_ID")?.toInt()
 
         recyclerView = bindingCountryActivity.recyclerViewCountry
         searchView = bindingCountryActivity.searchViewCountry
@@ -47,9 +48,10 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
 
         bindingCountryActivity.btnContinue.setOnClickListener {
             if(KEY_COUNTRY_ID != null && KEY_COUNTRY_NAME != null && KEY_USERNAME != null) {
-                val intent = Intent(applicationContext,JobseekerActivity::class.java)
-                intent.putExtra("country_id" , KEY_COUNTRY_ID)
-                intent.putExtra("country_name" , KEY_COUNTRY_NAME)
+                intent.putExtra("COUNTRY_ID" , KEY_COUNTRY_ID)
+                intent.putExtra("COUNTRY_NAME" , KEY_COUNTRY_NAME)
+                intent.putExtra("ROLE_ID" , KEY_ROLE)
+                val intent = Intent(applicationContext,CreateProfileActivity::class.java)
                 startActivity(intent)
             } else {
                 Toast.makeText(applicationContext,"Please select your country",Toast.LENGTH_LONG).show()

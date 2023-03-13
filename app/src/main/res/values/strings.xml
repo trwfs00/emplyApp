@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">emplyApp</string>
+    <string name="gender">Gender</string>
 </resources>
