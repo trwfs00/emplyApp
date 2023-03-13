@@ -24,6 +24,10 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
     private lateinit var searchView: SearchView
     private lateinit var session: SessionManager
 
+    var KEY_COUNTRY_ID: Int? = null
+    var KEY_COUNTRY_NAME: String? = null
+    var KEY_USERNAME: String? = null
+
     private var CountryList = ArrayList<CountryClass>()
     val createClient = CountryAPI.create()
 
@@ -34,7 +38,7 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
 
         session = SessionManager(applicationContext)
         // Read data from the preferences
-        val username: String? = session.pref.getString(SessionManager.KEY_USERNAME, null)
+        KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
 
         recyclerView = bindingCountryActivity.recyclerViewCountry
         searchView = bindingCountryActivity.searchViewCountry
@@ -120,10 +124,21 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
     }
 
     override fun onClick(position: Int) {
-        val intent = Intent(this@CountryActivity,ProfileActivity::class.java)
-        intent.putExtra("country_id" , CountryList[position].country_id)
-        intent.putExtra("country_nname" , CountryList[position].nicename)
-        startActivity(intent)
+        KEY_COUNTRY_ID = CountryList[position].country_id
+        KEY_COUNTRY_NAME = CountryList[position].nicename
+//        val intent = Intent(this@CountryActivity,ProfileActivity::class.java)
+//        intent.putExtra("country_id" , CountryList[position].country_id)
+//        intent.putExtra("country_nname" , CountryList[position].nicename)
+//        startActivity(intent)
+    }
+
+    fun continuePage() {
+        if(KEY_COUNTRY_ID != null && KEY_COUNTRY_NAME != null && KEY_USERNAME != null) {
+            val intent = Intent(applicationContext,JobseekerActivity::class.java)
+            intent.putExtra("country_id" , KEY_COUNTRY_ID)
+            intent.putExtra("country_name" , KEY_COUNTRY_NAME)
+          startActivity(intent)
+        }
     }
 
 }
