@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeActivity">
+    tools:context=".EmployerHomeActivity">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="30dp">
         <RelativeLayout
-            android:id="@+id/userBar"
+            android:id="@+id/EmployerBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -40,7 +41,7 @@
                     android:id="@+id/txtUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Teerawut Sungkagaro"
+                    android:text="Employer"
                     android:textSize="20sp"
                     android:textColor="@color/font_dark"
                     android:textStyle="bold"/>
@@ -54,35 +55,27 @@
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <LinearLayout
-            android:id="@+id/searchBar"
+            android:id="@+id/btnPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/rounded_box"
             android:layout_marginVertical="24dp"
-            android:layout_below="@id/userBar">
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:padding="16dp"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:background="#00FFFFFF"
-                android:scaleType="centerCrop"
-                android:src="@drawable/search_icon"/>
-            <com.google.android.material.textfield.TextInputEditText
+            android:layout_below="@id/EmployerBar">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:paddingLeft="12dp"
-                android:background="@drawable/rounded_box"
-                android:textColor="@color/font_grey"
-                android:textColorHint="@color/font_inbox"
-                android:inputType="text"
-                android:hint="Search for a job or company"
-                android:paddingHorizontal="5dp"
-                android:textSize="16sp"/>
+                android:layout_height="50dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/rounded_primary_box"
+                android:text="Post a job"
+                android:textAllCaps="false"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white" />
         </LinearLayout>
         <RelativeLayout
-            android:id="@+id/tipsforyou"
-            android:layout_below="@id/searchBar"
+            android:id="@+id/YourPost"
+            android:layout_below="@id/btnPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
@@ -95,7 +88,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/font_dark"
-                    android:text="Tips for you"
+                    android:text="Your Posts"
                     android:layout_alignParentStart="true"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
@@ -108,23 +101,10 @@
                     android:textSize="16sp"
                     android:textColor="@color/font_inbox"/>
             </RelativeLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/groupTxt_tipsforyou"
-                android:layout_marginVertical="16dp">
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_primary_box"
-                    android:scaleType="fitEnd"
-                    android:src="@drawable/tipforyou_img_1" />
-            </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/category"
-            android:layout_below="@id/tipsforyou"
+            android:id="@+id/RececntJobs"
+            android:layout_below="@id/YourPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
@@ -137,7 +117,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/font_dark"
-                    android:text="Category"
+                    android:text="Recent Jobs"
                     android:layout_alignParentStart="true"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
@@ -150,48 +130,6 @@
                     android:textSize="16sp"
                     android:textColor="@color/font_inbox"/>
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/groupTxt_category"
-                android:layout_marginVertical="16dp">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="10dp"
-                    android:nestedScrollingEnabled="true"
-                    android:orientation="horizontal"
-                    android:scrollbars="none"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/category_item_layout" />
-                <TextView
-                    android:id="@+id/RececntJobs"
-                    android:text="Recent Jobs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/font_dark"
-                    android:layout_below="@id/recyclerCategory"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/RececntJobs"/>
-            </RelativeLayout>
-
-
         </RelativeLayout>
     </RelativeLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="10dp"
-        app:elevation="0dp"
-        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>

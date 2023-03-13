@@ -123,5 +123,5 @@
         android:text="Save"
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/font_inbox" />
+        android:textColor="@color/white" />
 </RelativeLayout>
