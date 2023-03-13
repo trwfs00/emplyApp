@@ -17,9 +17,10 @@
             android:layout_height="16dp"
             style="@style/Widget.AppCompat.ActionBar.TabText"
             android:scaleType="fitStart"
-            android:src="@drawable/backward_icon"
             android:layout_centerVertical="true"
-            android:visibility="visible" />
+            android:src="@drawable/backward_icon"
+            android:visibility="visible"
+            android:layout_marginBottom="24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,16 +28,30 @@
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginLeft="16dp"
-            android:textColor="@color/font_dark"
             android:layout_toRightOf="@id/btnBack"/>
     </RelativeLayout>
-    <ScrollView
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_below="@id/titleBar"
+        android:id="@+id/searchViewCountry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleBar">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"/>
-    </ScrollView>
+        android:layout_marginTop="24dp"
+        app:queryHint="Search"
+        android:background="@drawable/rounded_box"
+        app:queryBackground="@android:color/transparent"
+        app:iconifiedByDefault="false"
+        app:searchIcon="@drawable/search_icon"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCountry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchViewCountry"
+        android:scrollbars="vertical"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="26dp"/>
+
+
+
 </RelativeLayout>
