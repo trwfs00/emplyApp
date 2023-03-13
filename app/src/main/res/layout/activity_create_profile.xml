@@ -194,12 +194,12 @@
         android:paddingHorizontal="30dp"
         android:layout_alignParentBottom="true">
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSave"
+            android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="6dp"
             android:background="@drawable/rounded_primary_box"
-            android:text="Save"
+            android:text="Continue"
             android:textAllCaps="false"
             android:layout_centerInParent="true"
             android:textColor="@color/font_inbox" />
