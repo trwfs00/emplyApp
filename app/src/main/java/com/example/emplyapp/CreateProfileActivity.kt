@@ -58,6 +58,10 @@ class CreateProfileActivity : AppCompatActivity() {
             showInputDialog()
         }
 
+        binding.calender.setOnClickListener {
+            ShowDatePickerDialog()
+        }
+
         binding.btnContinue.setOnClickListener {
             var KEY_FULLNAME = binding.edtFullname.text.toString()
             var KEY_NICKNAME = binding.edtNickname.text.toString()
@@ -110,6 +114,11 @@ class CreateProfileActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Please enter your complete information.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun ShowDatePickerDialog() {
+        val newDateFragment = DatePickerFragment()
+        newDateFragment.show(supportFragmentManager,"Date Picker")
     }
     private fun showInputDialog() {
         val dialogBuilder = AlertDialog.Builder(this)
