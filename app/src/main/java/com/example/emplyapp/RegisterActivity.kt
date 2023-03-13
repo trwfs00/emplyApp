@@ -59,7 +59,10 @@ class RegisterActivity : AppCompatActivity() {
                             "Successfully Register",
                             Toast.LENGTH_LONG
                         ).show()
-                        var i: Intent = Intent(applicationContext, MainActivity::class.java)
+                        val id_back = response.body()?.Login_id.toString()
+                        val username_back = response.body()?.username.toString()
+                        session.createLoginSession(username_back, id_back, edtUsername)
+                        var i: Intent = Intent(applicationContext, CountryActivity::class.java)
                         startActivity(i)
                         finish()
                     } else if (response.code() == 500) {
@@ -109,7 +112,11 @@ class RegisterActivity : AppCompatActivity() {
                             "Successfully Register",
                             Toast.LENGTH_LONG
                         ).show()
-                        var i: Intent = Intent(applicationContext, MainActivity::class.java)
+                        val id_back = response.body()?.Login_id.toString()
+                        val username_back = response.body()?.username.toString()
+                        session.createLoginSession(username_back, id_back, edtUsername)
+
+                        var i: Intent = Intent(applicationContext, CountryActivity::class.java)
                         startActivity(i)
                         finish()
                     } else if (response.code() == 500) {
