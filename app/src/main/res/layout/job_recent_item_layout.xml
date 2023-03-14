@@ -29,24 +29,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/jobName"
                     android:text="Jobs"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textColor="@color/font_dark"
                     android:textStyle="bold"/>
+
                 <TextView
+                    android:id="@+id/jobTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/jobTime"
-                    android:text="Time"
-                    android:textSize="12sp"
-                    android:textColor="@color/font_grey"
+                    android:layout_centerInParent="true"
                     android:layout_marginTop="3dp"
-                    android:textStyle="normal"
-                    android:layout_alignEnd="@id/jobName"
-                    android:layout_centerInParent="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:text="Time"
+                    android:textColor="@color/font_grey"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
             </RelativeLayout>
             <TextView
                 android:layout_width="272dp"
