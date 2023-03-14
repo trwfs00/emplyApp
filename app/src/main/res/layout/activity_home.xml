@@ -188,7 +188,7 @@
                 android:layout_below="@id/RececntJobs"
                 android:layout_marginTop="5dp"
                 tools:itemCount="2"
-                tools:listitem="@layout/job_item_layout"/>
+                tools:listitem="@layout/job_recent_item_layout"/>
         </RelativeLayout>
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
