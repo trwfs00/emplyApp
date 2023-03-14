@@ -47,6 +47,7 @@ class Company2Activity : AppCompatActivity() {
         KEY_IMAGE_PATH = intent.getStringExtra("image")
         KEY_COMPANY_ID = intent.getStringExtra("company_id")
 
+//        binding.txtSubtitle.text = KEY_LOGIN_ID+" "+KEY_USERNAME+" "+KEY_FULLNAME+" "+KEY_NICKNAME+" "+KEY_BIRTHDAY+" "+KEY_PHONE+" "+KEY_GENDER+" "+KEY_EMAIL+" "+KEY_COUNTRY_ID+" "+KEY_IMAGE_PATH+" "+KEY_COMPANY_ID
         binding.btnContinue.setOnClickListener {
             KEY_EMPLOYER_ID = binding.edtEmpId.text.toString()
             KEY_EMPLOYER_DEPT = binding.edtDept.text.toString()

@@ -40,6 +40,7 @@ class CreateProfileActivity : AppCompatActivity() {
         KEY_COUNTRY_ID = intent.getStringExtra("COUNTRY_ID")
         KEY_COUNTRY_NAME = intent.getStringExtra("COUNTRY_NAME")
         KEY_ROLE = intent.getStringExtra("ROLE_ID")
+        KEY_GENDER = 0
 
         val options = arrayOf("Male", "Female")
         val adapter = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, options)
@@ -69,7 +70,7 @@ class CreateProfileActivity : AppCompatActivity() {
             var KEY_EMAIL = binding.edtEmail.text.toString()
             var KEY_PHONE = binding.edtPhone.text.toString()
             var CHECK_ROLE: Int = KEY_ROLE!!.toInt()
-            if (KEY_FULLNAME != null && KEY_NICKNAME != null && KEY_BIRTHDAY != null && KEY_EMAIL != null && KEY_PHONE != null && KEY_IMAGE_PATH != null) {
+            if (KEY_FULLNAME != null && KEY_NICKNAME != null && KEY_BIRTHDAY != null && KEY_EMAIL != null && KEY_PHONE != null && KEY_IMAGE_PATH != null && KEY_GENDER != null) {
                 if (CHECK_ROLE === 0) {
                     createClient.insertProfile(
                         fullName = KEY_FULLNAME,
@@ -106,18 +107,18 @@ class CreateProfileActivity : AppCompatActivity() {
                         }
                     })
                 } else {
-                    val i: Intent = Intent(applicationContext, CompanyActivity::class.java)
-                    i.putExtra("login_id", KEY_LOGIN_ID)
-                    i.putExtra("username", KEY_USERNAME)
-                    i.putExtra("fullname", KEY_FULLNAME)
-                    i.putExtra("nickname", KEY_NICKNAME)
-                    i.putExtra("birthday", KEY_BIRTHDAY)
-                    i.putExtra("phone", KEY_PHONE)
-                    i.putExtra("gender", KEY_GENDER)
-                    i.putExtra("email", KEY_EMAIL)
-                    i.putExtra("country_id", KEY_COUNTRY_ID)
-                    i.putExtra("image", KEY_IMAGE_PATH)
-                    startActivity(i)
+                            val i: Intent = Intent(applicationContext, CompanyActivity::class.java)
+                            i.putExtra("login_id", KEY_LOGIN_ID)
+                            i.putExtra("username", KEY_USERNAME)
+                            i.putExtra("fullname", KEY_FULLNAME)
+                            i.putExtra("nickname", KEY_NICKNAME)
+                            i.putExtra("birthday", KEY_BIRTHDAY)
+                            i.putExtra("phone", KEY_PHONE)
+                            i.putExtra("gender", KEY_GENDER.toString())
+                            i.putExtra("email", KEY_EMAIL)
+                            i.putExtra("country_id", KEY_COUNTRY_ID)
+                            i.putExtra("image", KEY_IMAGE_PATH)
+                            startActivity(i)
                 }
             } else if (KEY_IMAGE_PATH === null) {
                 Toast.makeText(applicationContext,"Please provide your Photo url",Toast.LENGTH_SHORT).show()
