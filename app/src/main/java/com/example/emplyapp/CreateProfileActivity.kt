@@ -45,11 +45,6 @@ class CreateProfileActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, options)
         binding.spinnerGender.adapter = adapter
 
-        binding.txtCheckValue.setOnClickListener {
-            binding.txtCheckValue.text = KEY_COUNTRY_ID+" "+KEY_COUNTRY_NAME+" "+KEY_LOGIN_ID+" "+KEY_USERNAME+" "+KEY_ROLE+" "+KEY_GENDER+" "+KEY_IMAGE_PATH
-        }
-        binding.txtCheckValue.text = KEY_COUNTRY_ID+" "+KEY_COUNTRY_NAME+" "+KEY_LOGIN_ID+" "+KEY_USERNAME+" "+KEY_ROLE+" "+KEY_GENDER+" "+KEY_IMAGE_PATH
-
         binding.spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position) as String
@@ -97,8 +92,7 @@ class CreateProfileActivity : AppCompatActivity() {
                                     "Successfully create profile",
                                     Toast.LENGTH_LONG
                                 ).show()
-                                var i: Intent =
-                                    Intent(applicationContext, HomeActivity::class.java)
+                                val i: Intent = Intent(applicationContext, HomeActivity::class.java)
                                 startActivity(i)
                             } else {
                                 Toast.makeText(
@@ -117,8 +111,17 @@ class CreateProfileActivity : AppCompatActivity() {
                         }
                     })
                 } else {
-                    var i: Intent =
-                        Intent(applicationContext, CompanyActivity::class.java)
+                    val i: Intent = Intent(applicationContext, CompanyActivity::class.java)
+                    i.putExtra("login_id", KEY_LOGIN_ID)
+                    i.putExtra("username", KEY_USERNAME)
+                    i.putExtra("fullname", KEY_FULLNAME)
+                    i.putExtra("nickname", KEY_NICKNAME)
+                    i.putExtra("birthday", KEY_BIRTHDAY)
+                    i.putExtra("phone", KEY_PHONE)
+                    i.putExtra("gender", KEY_GENDER)
+                    i.putExtra("email", KEY_EMAIL)
+                    i.putExtra("country_id", KEY_COUNTRY_ID)
+                    i.putExtra("image", KEY_IMAGE_PATH)
                     startActivity(i)
                 }
             } else if (KEY_IMAGE_PATH === null) {
@@ -146,7 +149,7 @@ class CreateProfileActivity : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(this)
 
         val editText = EditText(this)
-        dialogBuilder.setTitle("Enter text")
+        dialogBuilder.setTitle("PHOTO URL")
             .setView(editText)
             .setPositiveButton("OK") { dialogInterface, i ->
                 val inputText = editText.text.toString()
@@ -167,18 +170,12 @@ class CreateProfileActivity : AppCompatActivity() {
         ).enqueue(object : Callback<RoleClass> {
             override fun onResponse(call: Call<RoleClass>, response: Response<RoleClass>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(
-                        applicationContext,
-                        response.body()?.Login_id.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
                     KEY_LOGIN_ID = response.body()?.Login_id.toString()
                 } else {
                     Toast.makeText(applicationContext, "Failed to find login_id", Toast.LENGTH_LONG)
                         .show()
                 }
             }
-
             override fun onFailure(call: Call<RoleClass>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,

@@ -59,8 +59,6 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
                 Toast.makeText(applicationContext,"Please select your country",Toast.LENGTH_LONG).show()
             }
         }
-
-        bindingCountryActivity.txtCheckValue.text = KEY_COUNTRY_ID+" "+KEY_COUNTRY_NAME+" "+KEY_USERNAME+" "+KEY_ROLE
     }
 
     override fun onResume() {

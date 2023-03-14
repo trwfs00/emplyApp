@@ -1,0 +1,21 @@
+package com.example.emplyapp
+
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+
+data class CompanyClass(
+    @Expose
+    @SerializedName("company_id") val company_id: Int,
+
+    @Expose
+    @SerializedName("country") val country: String,
+
+    @Expose
+    @SerializedName("state") val state: String,
+
+    @Expose
+    @SerializedName("address") val address: String,
+
+    @Expose
+    @SerializedName("logo") val logo: String
+)

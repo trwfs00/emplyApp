@@ -33,7 +33,7 @@
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="@color/font_dark"
-                android:layout_toRightOf="@id/btnApp"/>\
+                android:layout_toRightOf="@id/btnApp"/>
             <androidx.appcompat.widget.AppCompatImageButton
                 android:layout_width="46dp"
                 android:layout_height="46dp"

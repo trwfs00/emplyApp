@@ -39,6 +39,32 @@ interface UserAPI {
         @Field("picture") picture: String
     ):Call<Jobseeker>
 
+    @FormUrlEncoded
+    @POST("employer")
+    fun insertEmployer(
+        @Field("fullName") fullName: String,
+        @Field("nickName") nickName: String,
+        @Field("birthday") birthday: String,
+        @Field("phone") phone: String,
+        @Field("gender") gender: Int,
+        @Field("email") email: String,
+        @Field("status") status: Int,
+        @Field("dept") dept: String,
+        @Field("Login_id") Login_id: Int,
+        @Field("company_id") company_id: Int,
+        @Field("country_id") country_id: Int
+    ):Call<EmployerClass>
+
+    @FormUrlEncoded
+    @POST("company")
+    fun insertCompany(
+        @Field("name") name: String,
+        @Field("country") country: String,
+        @Field("state") state: String,
+        @Field("address") address: String,
+        @Field("logo") logo: String
+    ):Call<CompanyClass>
+
     companion object
     {
         fun create():UserAPI {
