@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".EmployerHomeActivity">
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -47,8 +46,8 @@
                     android:textStyle="bold"/>
             </LinearLayout>
             <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="52dp"
-                android:layout_height="52dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:background="#00FFFFFF"
                 android:scaleType="centerCrop"
                 android:src="@drawable/notification_icon"
@@ -103,7 +102,6 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/RececntJobs"
             android:layout_below="@id/YourPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -112,6 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/RececntJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
@@ -129,7 +128,23 @@
                     android:textAlignment="viewEnd"
                     android:textSize="16sp"
                     android:textColor="@color/font_inbox"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/RececntJobs"
+                    android:layout_marginTop="5dp"
+                    tools:listitem="@layout/job_item_layout"/>
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        app:elevation="0dp"
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>
