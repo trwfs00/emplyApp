@@ -19,12 +19,13 @@ class CreateProfileActivity : AppCompatActivity() {
     private lateinit var binding : ActivityCreateProfileBinding
 
     private lateinit var session: SessionManager
-    var KEY_COUNTRY_ID: Int? = null
+    var KEY_COUNTRY_ID: String? = null
     var KEY_COUNTRY_NAME: String? = null
     var KEY_USERNAME: String? = null
-    var KEY_ROLE: Int? = null
+    var KEY_ROLE: String? = null
     var KEY_GENDER: Int? = null
     var KEY_IMAGE_PATH: String? = null
+    var KEY_LOGIN_ID: String? = null
 
     val createClient = UserAPI.create()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +35,20 @@ class CreateProfileActivity : AppCompatActivity() {
 
         session = SessionManager(applicationContext)
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
-        KEY_COUNTRY_ID = intent.getStringExtra("COUNTRY_ID")?.toInt()
+        callDataUserId(KEY_USERNAME.toString())
+        var intent: Intent = getIntent()
+        KEY_COUNTRY_ID = intent.getStringExtra("COUNTRY_ID")
         KEY_COUNTRY_NAME = intent.getStringExtra("COUNTRY_NAME")
-        KEY_ROLE = intent.getStringExtra("ROLE_ID")?.toInt()
+        KEY_ROLE = intent.getStringExtra("ROLE_ID")
 
         val options = arrayOf("Male", "Female")
         val adapter = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, options)
         binding.spinnerGender.adapter = adapter
+
+        binding.txtCheckValue.setOnClickListener {
+            binding.txtCheckValue.text = KEY_COUNTRY_ID+" "+KEY_COUNTRY_NAME+" "+KEY_LOGIN_ID+" "+KEY_USERNAME+" "+KEY_ROLE+" "+KEY_GENDER+" "+KEY_IMAGE_PATH
+        }
+        binding.txtCheckValue.text = KEY_COUNTRY_ID+" "+KEY_COUNTRY_NAME+" "+KEY_LOGIN_ID+" "+KEY_USERNAME+" "+KEY_ROLE+" "+KEY_GENDER+" "+KEY_IMAGE_PATH
 
         binding.spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -59,14 +67,15 @@ class CreateProfileActivity : AppCompatActivity() {
         }
 
         binding.btnContinue.setOnClickListener {
+            callDataUserId(KEY_USERNAME!!)
             var KEY_FULLNAME = binding.edtFullname.text.toString()
             var KEY_NICKNAME = binding.edtNickname.text.toString()
             var KEY_BIRTHDAY = binding.edtDateBirthday.text.toString()
             var KEY_EMAIL = binding.edtEmail.text.toString()
             var KEY_PHONE = binding.edtPhone.text.toString()
-
-            if(KEY_FULLNAME != null && KEY_NICKNAME != null && KEY_BIRTHDAY != null && KEY_EMAIL != null && KEY_PHONE != null && KEY_IMAGE_PATH != null) {
-                if(KEY_ROLE == 0) {
+            var CHECK_ROLE: Int = KEY_ROLE!!.toInt()
+            if (KEY_FULLNAME != null && KEY_NICKNAME != null && KEY_BIRTHDAY != null && KEY_EMAIL != null && KEY_PHONE != null && KEY_IMAGE_PATH != null) {
+                if (CHECK_ROLE === 0) {
                     createClient.insertProfile(
                         fullName = KEY_FULLNAME,
                         nickName = KEY_NICKNAME,
@@ -74,40 +83,62 @@ class CreateProfileActivity : AppCompatActivity() {
                         phone = KEY_PHONE,
                         gender = KEY_GENDER!!,
                         email = KEY_EMAIL,
-                        Login_id = KEY_ROLE!!,
-                        country_id = KEY_COUNTRY_ID!!,
+                        Login_id = KEY_LOGIN_ID!!.toInt(),
+                        country_id = KEY_COUNTRY_ID!!.toInt(),
                         picture = KEY_IMAGE_PATH!!
                     ).enqueue(object : Callback<Jobseeker> {
-                        override fun onResponse(call: Call<Jobseeker>, response: Response<Jobseeker>) {
+                        override fun onResponse(
+                            call: Call<Jobseeker>,
+                            response: Response<Jobseeker>
+                        ) {
                             if (response.isSuccessful) {
                                 Toast.makeText(
                                     applicationContext,
-                                    "Successfully",
+                                    "Successfully create profile",
                                     Toast.LENGTH_LONG
                                 ).show()
-                                intent.putExtra("ROLE_ID" , 0)
-                                var i: Intent = Intent(applicationContext, HomeActivity::class.java)
+                                var i: Intent =
+                                    Intent(applicationContext, HomeActivity::class.java)
                                 startActivity(i)
-                                finish()
                             } else {
-                                Toast.makeText(applicationContext, "Failed Insert Profile", Toast.LENGTH_LONG)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Failed to find login_id",
+                                    Toast.LENGTH_LONG
+                                )
                                     .show()
                             }
                         }
 
                         override fun onFailure(call: Call<Jobseeker>, t: Throwable) {
-                            Toast.makeText(
-                                applicationContext,
-                                "Error onFailure: " + t.message,
-                                Toast.LENGTH_LONG
-                            ).show()
+                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG)
+                                .show()
+                            binding.txtCheckValue.text = t.message
                         }
                     })
                 } else {
-                    Toast.makeText(applicationContext,"Employer", Toast.LENGTH_SHORT).show()
+                    var i: Intent =
+                        Intent(applicationContext, CompanyActivity::class.java)
+                    startActivity(i)
                 }
+            } else if (KEY_IMAGE_PATH === null) {
+                Toast.makeText(applicationContext,"Please provide your Photo url",Toast.LENGTH_SHORT).show()
+            } else if (KEY_FULLNAME === null) {
+                Toast.makeText(applicationContext,"Please provide your Fullname",Toast.LENGTH_SHORT).show()
+            } else if (KEY_NICKNAME === null) {
+                Toast.makeText(applicationContext,"Please provide your Nickname",Toast.LENGTH_SHORT).show()
+            } else if (KEY_BIRTHDAY === null) {
+                Toast.makeText(applicationContext,"Please provide your Birthday",Toast.LENGTH_SHORT).show()
+            } else if (KEY_EMAIL === null) {
+                Toast.makeText(applicationContext,"Please provide your Email",Toast.LENGTH_SHORT).show()
+            } else if (KEY_PHONE === null) {
+                Toast.makeText(
+                    applicationContext,
+                    "Please provide your Phone number",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                Toast.makeText(applicationContext,"Please enter your complete information.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,"Error Please Contact Admin",Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -128,5 +159,34 @@ class CreateProfileActivity : AppCompatActivity() {
 
         val alertDialog = dialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun callDataUserId(username: String) {
+        createClient.getLoginId(
+            username = username
+        ).enqueue(object : Callback<RoleClass> {
+            override fun onResponse(call: Call<RoleClass>, response: Response<RoleClass>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(
+                        applicationContext,
+                        response.body()?.Login_id.toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
+                    KEY_LOGIN_ID = response.body()?.Login_id.toString()
+                } else {
+                    Toast.makeText(applicationContext, "Failed to find login_id", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<RoleClass>, t: Throwable) {
+                Toast.makeText(
+                    applicationContext,
+                    "Error onFailure: " + t.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+        })
     }
 }

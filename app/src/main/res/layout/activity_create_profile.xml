@@ -7,6 +7,11 @@
     tools:context=".CreateProfileActivity"
     android:orientation="vertical"
     android:scrollbars="none">
+    <TextView
+        android:id="@+id/txtCheckValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

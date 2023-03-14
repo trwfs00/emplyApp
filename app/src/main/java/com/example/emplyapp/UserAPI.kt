@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface UserAPI {
-
     @FormUrlEncoded
     @POST("register")
     fun insertUser(
@@ -20,6 +19,11 @@ interface UserAPI {
         @Path("username") username: String,
         @Path("password") password: String
     ): Call<LoginUserClass>
+
+    @GET("login/{username}")
+    fun getLoginId(
+        @Path("username") username: String
+    ):Call<RoleClass>
 
     @FormUrlEncoded
     @POST("jobseeker")
