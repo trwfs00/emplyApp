@@ -59,6 +59,7 @@ class Company2Activity : AppCompatActivity() {
                     phone = KEY_PHONE.toString(),
                     gender = KEY_GENDER!!.toInt(),
                     email = KEY_EMAIL.toString(),
+                    empcard = KEY_EMPLOYER_ID.toString(),
                     status = 0,
                     dept = KEY_EMPLOYER_DEPT.toString(),
                     Login_id = KEY_LOGIN_ID!!.toInt(),
@@ -75,7 +76,7 @@ class Company2Activity : AppCompatActivity() {
                                 "Successfully create profile",
                                 Toast.LENGTH_LONG
                             ).show()
-                            val i: Intent = Intent(applicationContext, HomeActivity::class.java)
+                            val i: Intent = Intent(applicationContext, EmployerHomeActivity::class.java)
                             startActivity(i)
                         } else {
                             Toast.makeText(
@@ -88,7 +89,12 @@ class Company2Activity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<EmployerClass>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        Toast.makeText(
+                            applicationContext,
+                            t.message,
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
                     }
                 })
             } else if (KEY_EMPLOYER_ID === null) {

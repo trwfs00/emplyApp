@@ -141,7 +141,6 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
         KEY_COUNTRY_ID = CountryList[position].country_id.toString()
         KEY_COUNTRY_NAME = CountryList[position].nicename
         Toast.makeText(applicationContext,KEY_COUNTRY_NAME,Toast.LENGTH_SHORT).show()
-        bindingCountryActivity.txtCheckValue.text = KEY_COUNTRY_ID+" "+KEY_COUNTRY_NAME+" "+KEY_USERNAME+" "+KEY_ROLE
     }
 }
 

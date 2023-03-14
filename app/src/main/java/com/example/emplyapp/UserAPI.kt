@@ -48,6 +48,7 @@ interface UserAPI {
         @Field("phone") phone: String,
         @Field("gender") gender: Int,
         @Field("email") email: String,
+        @Field("empcard") empcard: String,
         @Field("status") status: Int,
         @Field("dept") dept: String,
         @Field("Login_id") Login_id: Int,

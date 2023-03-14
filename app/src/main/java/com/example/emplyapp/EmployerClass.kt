@@ -23,6 +23,9 @@ data class EmployerClass(
     @SerializedName("email") val email: String,
 
     @Expose
+    @SerializedName("empcard") val empcard: String,
+
+    @Expose
     @SerializedName("status") val status: Int,
 
     @Expose

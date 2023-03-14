@@ -87,11 +87,6 @@ class CreateProfileActivity : AppCompatActivity() {
                             response: Response<Jobseeker>
                         ) {
                             if (response.isSuccessful) {
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Successfully create profile",
-                                    Toast.LENGTH_LONG
-                                ).show()
                                 val i: Intent = Intent(applicationContext, HomeActivity::class.java)
                                 startActivity(i)
                             } else {
