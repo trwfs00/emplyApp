@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.JobItemLayoutBinding
 
-class HomeAdapter(val studentList:ArrayList<JobRecent>?, val context: Context):
+class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context):
     RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
     inner class ViewHolder(view: View, val binding: JobItemLayoutBinding):
         RecyclerView.ViewHolder(view){
@@ -21,13 +22,14 @@ class HomeAdapter(val studentList:ArrayList<JobRecent>?, val context: Context):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
 
-        binding.jobName?.text = "${studentList!![position].job_name}"
-        binding.jobInc?.text = "${studentList!![position].company_name}"
-        binding.jobCountry?.text = "${studentList!![position].country}"
-        binding.jobType?.text = "${studentList!![position].type}"
+        binding.jobName?.text = "${JobRecentlist!![position].job_name}"
+        binding.jobInc?.text = "${JobRecentlist!![position].company_name}"
+        binding.jobCountry?.text = "${JobRecentlist!![position].country}"
+        binding.jobType?.text = "${JobRecentlist!![position].type}"
+        Glide.with(context).load(JobRecentlist[position].logo).into(binding.imgJob)
     }
 
     override fun getItemCount(): Int {
-        return  studentList!!.size
+        return  JobRecentlist!!.size
     }
 }
