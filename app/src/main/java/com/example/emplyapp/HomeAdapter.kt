@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.JobItemLayoutBinding
+import com.example.emplyapp.databinding.JobRecentItemLayoutBinding
 
 class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context):
     RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
-    inner class ViewHolder(view: View, val binding: JobItemLayoutBinding):
+    inner class ViewHolder(view: View, val binding: JobRecentItemLayoutBinding):
         RecyclerView.ViewHolder(view){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = JobItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = JobRecentItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding.root,binding)
     }
 
@@ -26,6 +27,7 @@ class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context)
         binding.jobInc?.text = "${JobRecentlist!![position].company_name}"
         binding.jobCountry?.text = "${JobRecentlist!![position].country}"
         binding.jobType?.text = "${JobRecentlist!![position].type}"
+        binding.jobTime?.text = "${JobRecentlist!![position].created_at}"
         Glide.with(context).load(JobRecentlist[position].logo).into(binding.imgJob)
     }
 

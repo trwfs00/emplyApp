@@ -17,5 +17,8 @@ data class JobRecent(
     @SerializedName("type") val type:String,
 
     @Expose
-    @SerializedName("logo") val logo:String
+    @SerializedName("logo") val logo:String,
+
+    @Expose
+    @SerializedName("created_at") val created_at:String
 ){}
