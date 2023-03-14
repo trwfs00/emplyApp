@@ -1,17 +1,14 @@
 package com.example.emplyapp
 
-import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.ApplicationItemLayoutBinding
 
-class ApplicationAdapter(val context: Context, val applicationList: ArrayList<ApplicationClass>?) :
+class ApplicationAdapter(val applicationList: ArrayList<ApplicationClass>, val context: Context) :
     RecyclerView.Adapter<ApplicationAdapter.ViewHolder>() {
 
     class ViewHolder(view: View, val binding: ApplicationItemLayoutBinding) :

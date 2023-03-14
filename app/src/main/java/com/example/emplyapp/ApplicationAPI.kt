@@ -6,10 +6,9 @@ import retrofit2.http.Path
 import retrofit2.http.Url
 
 interface ApplicationAPI {
-    @GET("/application/{jobseeker_id}")
+    @GET("application/{jobseeker_id}")
     fun getApplications(
-        @Path("job_name") job_name: String,
-        @Path("company_name") company_name: String,
-        @Path("logo") logo: String
+        @Path("jobseeker_id") jobseeker_id: Int
     ): Call<List<ApplicationClass>>
+
 }
