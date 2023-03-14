@@ -25,7 +25,7 @@ class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context)
 
         binding.jobName?.text = "${JobRecentlist!![position].job_name}"
         binding.jobInc?.text = "${JobRecentlist!![position].company_name}"
-        binding.jobCountry?.text = "${JobRecentlist!![position].country}"
+        binding.jobCountry?.text = "${JobRecentlist!![position].nicename}"
         binding.jobType?.text = "${JobRecentlist!![position].type}"
         binding.jobTime?.text = "${JobRecentlist!![position].created_at}"
         Glide.with(context).load(JobRecentlist[position].logo).into(binding.imgJob)

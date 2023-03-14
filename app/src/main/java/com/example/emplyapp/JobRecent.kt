@@ -11,7 +11,7 @@ data class JobRecent(
     @SerializedName("company_name") val company_name:String,
 
     @Expose
-    @SerializedName("country") val country:String,
+    @SerializedName("nicename") val nicename:String,
 
     @Expose
     @SerializedName("type") val type:String,
