@@ -1,0 +1,33 @@
+package com.example.emplyapp
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.emplyapp.databinding.JobItemLayoutBinding
+
+class HomeAdapter(val studentList:ArrayList<JobRecent>?, val context: Context):
+    RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+    inner class ViewHolder(view: View, val binding: JobItemLayoutBinding):
+        RecyclerView.ViewHolder(view){
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = JobItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return ViewHolder(binding.root,binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val binding = holder.binding
+
+        binding.jobName?.text = "${studentList!![position].job_name}"
+        binding.jobInc?.text = "${studentList!![position].company_name}"
+        binding.jobCountry?.text = "${studentList!![position].country}"
+        binding.jobType?.text = "${studentList!![position].type}"
+    }
+
+    override fun getItemCount(): Int {
+        return  studentList!!.size
+    }
+}
