@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.emplyapp.databinding.ActivityHomeBinding
-import com.example.emplyapp.databinding.CategoryItemLayoutBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +16,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding : ActivityHomeBinding
     private lateinit var session: SessionManager
     var categoryList = arrayListOf<CategoryClass>()
+    var jobrecentlist = arrayListOf<JobRecent>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -53,6 +55,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         callCategoryData()
+        callJobRecentData()
     }
 
     private fun callCategoryData(){
@@ -71,10 +74,38 @@ class HomeActivity : AppCompatActivity() {
                     response.body()?.forEach {
                         categoryList.add(CategoryClass(it.category_name))
                     }
-                    binding.recyclerCategory.adapter = HomeAdapter(categoryList,applicationContext)
+                    binding.recyclerCategory.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                    binding.recyclerCategory.adapter = CategoryAdapter(categoryList, applicationContext)
                 }
 
                 override fun onFailure(call: Call<List<CategoryClass>>, t: Throwable) {
+                    Toast.makeText(applicationContext,"Error onFailure" + t.message,Toast.LENGTH_LONG).show()
+                }
+
+            })
+    }
+
+    private fun callJobRecentData(){
+        jobrecentlist.clear()
+        val serv : JobRecentAPI = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(JobRecentAPI ::class.java)
+        serv.getJobsRecent()
+            .enqueue(object : Callback<List<JobRecent>> {
+                override fun onResponse(
+                    call: Call<List<JobRecent>>,
+                    response: Response<List<JobRecent>>,
+                ) {
+                    response.body()?.forEach {
+                        jobrecentlist.add(JobRecent(it.job_name,it.company_name,it.nicename,it.type,it.logo,it.created_at))
+                    }
+                    binding.JobRecentRycyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                    binding.JobRecentRycyclerView.adapter = JobRecentAdapter(jobrecentlist, applicationContext)
+                }
+
+                override fun onFailure(call: Call<List<JobRecent>>, t: Throwable) {
                     Toast.makeText(applicationContext,"Error onFailure" + t.message,Toast.LENGTH_LONG).show()
                 }
 

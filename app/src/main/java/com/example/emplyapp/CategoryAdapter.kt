@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.emplyapp.databinding.CategoryItemLayoutBinding
 import kotlin.collections.ArrayList
 
-class HomeAdapter(val categoryList: ArrayList<CategoryClass>, val context: Context) :
-    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class CategoryAdapter(val categoryList: ArrayList<CategoryClass>, val context: Context) :
+    RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View, val binding: CategoryItemLayoutBinding) :
+    inner class ViewHolder(view: View, val bindingCat: CategoryItemLayoutBinding) :
         RecyclerView.ViewHolder(view) {
         init {
-            binding.jobCategory.setOnClickListener {
+            bindingCat.jobCategory.setOnClickListener {
                 val context: Context = view.context
                 val intent = Intent(context, HomeActivity::class.java)
                 intent.putExtra("category_name", categoryList[adapterPosition].category_name)
@@ -37,7 +37,7 @@ class HomeAdapter(val categoryList: ArrayList<CategoryClass>, val context: Conte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val binding = holder.binding
+        val binding = holder.bindingCat
         binding.jobCategory.text = "${categoryList!![position].category_name}"
     }
 

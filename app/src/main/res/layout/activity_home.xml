@@ -46,8 +46,8 @@
                     android:textStyle="bold"/>
             </LinearLayout>
             <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="52dp"
-                android:layout_height="52dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:background="#00FFFFFF"
                 android:scaleType="centerCrop"
                 android:src="@drawable/notification_icon"
@@ -168,16 +168,28 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="5"
                     tools:listitem="@layout/category_item_layout" />
-                <TextView
-                    android:id="@+id/RececntJobs"
-                    android:text="Recent Jobs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/font_dark"
-                    android:layout_below="@id/recyclerCategory"/>
             </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category">
+            <TextView
+                android:id="@+id/RececntJobs"
+                android:text="Recent Jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/font_dark" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/JobRecentRycyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/RececntJobs"
+                android:layout_marginTop="5dp"
+                tools:itemCount="2"
+                tools:listitem="@layout/job_recent_item_layout"/>
         </RelativeLayout>
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
