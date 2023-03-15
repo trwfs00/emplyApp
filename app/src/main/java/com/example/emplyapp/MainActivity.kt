@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 var i: Intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(i)
                 finish()
-            } else {
+            } else if (KEY_ROLE?.toInt() == 1) {
                 var i: Intent = Intent(applicationContext, EmployerHomeActivity::class.java)
                 startActivity(i)
                 finish()
