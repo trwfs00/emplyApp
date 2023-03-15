@@ -35,12 +35,11 @@ class JobRecentAdapter(val jobrecentlist:ArrayList<JobRecent>?, val context: Con
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.bindingJobRecent
 
-        binding.jobName?.text = "${jobrecentlist!![position].job_name}"
-        binding.jobInc?.text = "${jobrecentlist!![position].company_name}"
-        binding.jobCountry?.text = "${jobrecentlist!![position].nicename}"
-        binding.jobType?.text = "${jobrecentlist!![position].type}"
-
-        binding.jobTime?.text = "${diffForHuman(jobrecentlist!![position].created_at)}"
+        binding.jobName?.text = jobrecentlist!![position].job_name
+        binding.jobInc?.text = jobrecentlist!![position].company_name
+        binding.jobCountry?.text = jobrecentlist!![position].nicename
+        binding.jobType?.text = jobrecentlist!![position].type
+        binding.jobTime?.text = diffForHuman(jobrecentlist!![position].created_at)
         Glide.with(context).load(jobrecentlist[position].logo).into(binding.imgJob)
     }
 

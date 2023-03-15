@@ -237,14 +237,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/lineNormal2"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/rounded_box"
+            android:layout_marginVertical="30dp"
+            android:background="@drawable/rounded_red_box"
             android:text="Sign out"
             android:textAllCaps="false"
-            android:textColor="@color/font_inbox" />
+            android:textColor="@color/font_white" />
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottom_nav"

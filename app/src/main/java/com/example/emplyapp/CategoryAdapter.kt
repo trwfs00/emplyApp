@@ -38,7 +38,7 @@ class CategoryAdapter(val categoryList: ArrayList<CategoryClass>, val context: C
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.bindingCat
-        binding.jobCategory.text = "${categoryList!![position].category_name}"
+        binding.jobCategory.text = categoryList!![position].category_name
     }
 
     override fun getItemCount(): Int {
