@@ -64,7 +64,7 @@ interface UserAPI {
     @FormUrlEncoded
     @POST("company")
     fun insertCompany(
-        @Field("name") name: String,
+        @Field("company_name") company_name: String,
         @Field("country") country: String,
         @Field("state") state: String,
         @Field("address") address: String,

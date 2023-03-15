@@ -64,7 +64,7 @@ class CompanyActivity : AppCompatActivity() {
 
             if(KEY_COMPANY_NAME != null && KEY_COMPANY_COUNTRY != null && KEY_COMPANY_STATE != null && KEY_COMPANY_ADDRESS != null && KEY_COMPANY_IMAGE_PATH != null) {
                 createCompany.insertCompany(
-                    name = KEY_COMPANY_NAME.toString(),
+                    company_name = KEY_COMPANY_NAME.toString(),
                     country = KEY_COMPANY_COUNTRY.toString(),
                     state = KEY_COMPANY_STATE.toString(),
                     address = KEY_COMPANY_ADDRESS.toString(),
@@ -97,7 +97,7 @@ class CompanyActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 applicationContext,
-                                "Failed to find login_id",
+                                "Failed to find company_id",
                                 Toast.LENGTH_LONG
                             )
                                 .show()
