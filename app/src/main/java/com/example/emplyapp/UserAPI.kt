@@ -56,6 +56,11 @@ interface UserAPI {
         @Field("country_id") country_id: Int
     ):Call<EmployerClass>
 
+    @GET("fetch/:username")
+    fun fetchUser(
+        @Path("username") username: String
+    ):Call<RoleClass>
+
     @FormUrlEncoded
     @POST("company")
     fun insertCompany(
