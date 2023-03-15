@@ -53,6 +53,7 @@
                 android:src="@drawable/notification_icon"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
@@ -69,17 +70,15 @@
                 android:background="#00FFFFFF"
                 android:scaleType="centerCrop"
                 android:src="@drawable/search_icon"/>
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
+                android:id="@+id/txtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:paddingLeft="12dp"
-                android:background="@drawable/rounded_box"
-                android:textColor="@color/font_grey"
+                android:paddingTop="15dp"
+                android:textSize="16sp"
                 android:textColorHint="@color/font_inbox"
-                android:inputType="text"
-                android:hint="Search for a job or company"
-                android:paddingHorizontal="5dp"
-                android:textSize="16sp"/>
+                android:hint="Search for a job or company"/>
         </LinearLayout>
         <RelativeLayout
             android:id="@+id/tipsforyou"

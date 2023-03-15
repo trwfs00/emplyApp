@@ -28,9 +28,11 @@ class HomeActivity : AppCompatActivity() {
         // Read data from the preferences
         val username: String? = session.pref.getString(SessionManager.KEY_USERNAME, null)
         binding.txtUsername.text = username
-        binding.btnSearch.setOnClickListener {
-            val i : Intent = Intent(applicationContext, SearchActivity::class.java)
-            startActivity(i)
+
+        binding.searchBar.setOnClickListener {
+            Toast.makeText(applicationContext, "WorkBAR", Toast.LENGTH_SHORT).show()
+            var intent = Intent(applicationContext, SearchActivity::class.java)
+            startActivity(intent)
         }
 
         binding.bottomNav.setOnItemSelectedListener {
@@ -53,11 +55,6 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
             true
-        }
-
-        binding.searchBar.setOnClickListener {
-            var intent = Intent(applicationContext, SearchActivity::class.java)
-            startActivity(intent)
         }
     }
 
@@ -120,4 +117,5 @@ class HomeActivity : AppCompatActivity() {
 
             })
     }
+
 }
