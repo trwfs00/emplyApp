@@ -28,6 +28,10 @@ class HomeActivity : AppCompatActivity() {
         // Read data from the preferences
         val username: String? = session.pref.getString(SessionManager.KEY_USERNAME, null)
         binding.txtUsername.text = username
+        binding.btnSearch.setOnClickListener {
+            val i : Intent = Intent(applicationContext, SearchActivity::class.java)
+            startActivity(i)
+        }
 
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
