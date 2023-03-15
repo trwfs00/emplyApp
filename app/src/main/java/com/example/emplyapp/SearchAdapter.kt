@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class SearchAdapter(
-    var SearchList: ArrayList<SearchClass>,
-    var mListener: SearchActivity,
-    val context: Context
-    ) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-
+    private val searchList: List<SearchClass>,
+    private val mListener: SearchActivity,
+    private val context: Context
+) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val jobName : TextView = itemView.findViewById(R.id.JobName)
         val companyName : TextView = itemView.findViewById(R.id.jobInc)
@@ -33,7 +32,7 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        val Search = SearchList[position]
+        val Search = searchList[position]
 
         holder.jobName.text = Search.job_name
         holder.companyName.text = Search.company_name
@@ -49,7 +48,7 @@ class SearchAdapter(
     }
 
     override fun getItemCount(): Int {
-        return SearchList.size
+        return searchList!!.size
     }
 
     interface onItemClickListener {

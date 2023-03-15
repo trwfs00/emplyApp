@@ -62,8 +62,7 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
                     response.body()?.forEach {
                         SearchList.add(SearchClass(it.job_name, it.company_name, it.country_name, it.state, it.salaryFrom, it.salaryTo, it.type, it.description, it.minimumQualification, it.benefit))
                     }
-                    bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList
-                        ,this@SearchActivity)
+                    bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList, this@SearchActivity, applicationContext)
                 }
 
                 override fun onFailure(call: Call<List<SearchClass>>, t: Throwable) {
@@ -85,8 +84,7 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
                         response.body()?.forEach {
                             SearchList.add(SearchClass(it.job_name, it.company_name, it.country_name, it.state, it.salaryFrom, it.salaryTo, it.type, it.description, it.minimumQualification, it.benefit))
                         }
-                        bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList
-                            ,this@SearchActivity)
+                        bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList, this@SearchActivity, applicationContext)
                     }
 
                     override fun onFailure(call: Call<List<SearchClass>>, t: Throwable) {

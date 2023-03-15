@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
                         categoryList.add(CategoryClass(it.category_name))
                     }
                     binding.recyclerCategory.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
-                    binding.recyclerCategory.adapter = CategoryAdapter(categoryList, applicationContext)
+                    binding.recyclerCategory.adapter = CategoryNameAdapter(categoryList, applicationContext)
                 }
 
                 override fun onFailure(call: Call<List<CategoryClass>>, t: Throwable) {

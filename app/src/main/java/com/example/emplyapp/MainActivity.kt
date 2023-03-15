@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                     KEY_LOGIN_ID = response.body()!!.Login_id.toString()
                     KEY_ROLE = response.body()!!.Login_role.toString()
                 } else {
-                    Toast.makeText(applicationContext, "Failed to find login_id", Toast.LENGTH_LONG)
+                    Toast.makeText(applicationContext, "Failed to find Login_role", Toast.LENGTH_LONG)
                         .show()
                 }
             }
