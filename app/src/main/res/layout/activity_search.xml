@@ -19,33 +19,18 @@
             android:src="@drawable/backward_icon"
             android:layout_centerVertical="true"
             android:visibility="visible" />
-        <RelativeLayout
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_box"
+        <androidx.appcompat.widget.SearchView
+            android:layout_toRightOf="@id/btnBack"
             android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@id/btnBack">
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/iconSearch"
-                android:padding="16dp"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:background="@drawable/rounded_box"
-                android:scaleType="centerCrop"
-                android:src="@drawable/search_icon"/>
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/rounded_box"
-                android:textColor="@color/font_grey"
-                android:textColorHint="@color/font_inbox"
-                android:inputType="text"
-                android:layout_toRightOf="@id/iconSearch"
-                android:hint="Search"
-                android:paddingHorizontal="5dp"
-                android:textSize="16sp"/>
-        </RelativeLayout>
+            android:id="@+id/searchViewSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:queryHint="Search"
+            android:background="@drawable/rounded_box"
+            app:queryBackground="@android:color/transparent"
+            app:iconifiedByDefault="false"
+            app:searchIcon="@drawable/search_icon"/>
+
     </RelativeLayout>
     <TextView
         android:id="@+id/result"
