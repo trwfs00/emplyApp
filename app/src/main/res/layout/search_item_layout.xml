@@ -48,18 +48,51 @@
             android:layout_height="wrap_content"
             android:text="Location"
             android:layout_marginTop="28dp"/>
-        <TextView
-            android:id="@+id/jobSalary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10000-25000 /month"
-            android:textColor="@color/font_primary"
-            android:layout_marginTop="6dp"/>
+        <RelativeLayout
+            android:id="@+id/layoutSalary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/jobSalaryFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10000"
+                android:textColor="@color/font_primary"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"/>
+            <TextView
+                android:id="@+id/jobSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="@color/font_primary"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_toRightOf="@id/jobSalaryFrom"/>
+            <TextView
+                android:id="@+id/jobSalaryTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25000"
+                android:textColor="@color/font_primary"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_toRightOf="@id/jobSalary"/>
+            <TextView
+                android:id="@+id/jobSalaryMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/month"
+                android:textColor="@color/font_primary"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_toRightOf="@id/jobSalaryTo"/>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/jobSalary"
+            android:layout_below="@id/layoutSalary"
             android:layout_marginTop="4dp"
             android:orientation="horizontal">
             <TextView
@@ -73,16 +106,6 @@
                 android:textSize="10sp"
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="5dp" />
-            <TextView
-                android:id="@+id/jobTypeTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Type2"
-                android:textColor="#A1B3C2"
-                android:background="@drawable/rounded_box"
-                android:paddingHorizontal="11dp"
-                android:textSize="10sp"
-                android:layout_marginTop="7dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

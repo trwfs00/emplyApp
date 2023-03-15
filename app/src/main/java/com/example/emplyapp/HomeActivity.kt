@@ -50,6 +50,11 @@ class HomeActivity : AppCompatActivity() {
             }
             true
         }
+
+        binding.searchBar.setOnClickListener {
+            var intent = Intent(applicationContext, SearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
