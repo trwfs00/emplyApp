@@ -25,6 +25,9 @@ interface UserAPI {
         @Path("username") username: String
     ):Call<RoleClass>
 
+    @GET("fetch/{username}")
+    fun fetchUserData(@Path("username") username: String): Call<UserDataClass>
+
     @FormUrlEncoded
     @POST("jobseeker")
     fun insertProfile(
@@ -55,11 +58,6 @@ interface UserAPI {
         @Field("company_id") company_id: Int,
         @Field("country_id") country_id: Int
     ):Call<EmployerClass>
-
-    @GET("fetch/:username")
-    fun fetchUser(
-        @Path("username") username: String
-    ):Call<RoleClass>
 
     @FormUrlEncoded
     @POST("company")

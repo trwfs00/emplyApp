@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                                 session.createLoginSession(username_back, id_back, username)
                                 var i: Intent =
                                     Intent(applicationContext, HomeActivity::class.java)
+                                i.putExtra("username", username_back)
                                 startActivity(i)
                                 finish()
                             }
@@ -110,6 +111,7 @@ class MainActivity : AppCompatActivity() {
                                 session.createLoginSession(username_back, id_back, username)
                                 var i: Intent =
                                     Intent(applicationContext, EmployerHomeActivity::class.java)
+                                i.putExtra("username", username_back)
                                 startActivity(i)
                                 finish()
                             }
