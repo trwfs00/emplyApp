@@ -93,7 +93,7 @@ class ProfileActivity : AppCompatActivity() {
                     KEY_STATUS = response.body()?.status
 
                     binding.txtUsername.text = response.body()?.fullName
-                    
+
                     Glide.with(applicationContext)
                         .load(KEY_PICTURE)
                         .into(binding.imgUser)
