@@ -110,7 +110,7 @@
             android:layout_height="50dp"
             android:background="@drawable/rounded_box"
             android:layout_marginTop="10dp"
-            android:hint="dd/mm/yy"
+            android:hint="yyyy/mm/dd"
             android:inputType="date"
             android:paddingHorizontal="20dp"/>
     </LinearLayout>

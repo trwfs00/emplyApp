@@ -44,6 +44,18 @@ class ProfileActivity : AppCompatActivity() {
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
         KEY_USERNAME?.let { getUserData(it) }
 
+        binding.btnPersonalInformation.setOnClickListener{
+            var i: Intent = Intent(applicationContext, EditProfileActivity::class.java)
+            startActivity(i)
+            finish()
+        }
+
+        binding.btnPrivacyPolicy.setOnClickListener{
+            var i: Intent = Intent(applicationContext, EditProfileActivity::class.java)
+            startActivity(i)
+            finish()
+        }
+
         binding.btnLogout.setOnClickListener(){
             val edit = session.edior
             edit.clear()
