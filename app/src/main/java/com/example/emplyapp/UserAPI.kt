@@ -39,7 +39,7 @@ interface UserAPI {
         @Field("email") email: String,
         @Field("Login_id") Login_id: Int,
         @Field("country_id") country_id: Int,
-        @Field("picture") picture: String
+        @Field("picture_jobseek") picture_jobseek: String
     ):Call<Jobseeker>
 
     @FormUrlEncoded
@@ -53,6 +53,7 @@ interface UserAPI {
         @Field("email") email: String,
         @Field("empcard") empcard: String,
         @Field("status") status: Int,
+//        @Field("picture_emp") picture_emp: String,
         @Field("dept") dept: String,
         @Field("Login_id") Login_id: Int,
         @Field("company_id") company_id: Int,

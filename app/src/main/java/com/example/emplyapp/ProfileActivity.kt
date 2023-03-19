@@ -86,7 +86,7 @@ class ProfileActivity : AppCompatActivity() {
                     KEY_NICKNAME = response.body()?.nickName
                     KEY_GENDER = if(response.body()?.gender == 0) "Male" else "Female"
                     KEY_COUNTRY_ID = response.body()?.country_id
-                    KEY_PICTURE = response.body()?.picture_emp
+                    KEY_PICTURE = if(!response.body()?.picture_emp.isNullOrEmpty()) response.body()?.picture_emp else response.body()?.picture_jobseek
                     KEY_EMPCARD = response.body()?.empcard
                     KEY_DEPT = response.body()?.dept
                     KEY_COMPANY_ID = response.body()?.company_id

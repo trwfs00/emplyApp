@@ -14,4 +14,14 @@ data class LoginUserClass (
     @SerializedName("username") val username: String,
 
     @Expose
-    @SerializedName("Login_role") val Login_role: Int) {}
+    @SerializedName("Login_role") val Login_role: Int,
+
+    @Expose
+    @SerializedName("created_at") val created_at: String,
+
+    @Expose
+    @SerializedName("updated_at") val updated_at: String,
+
+    @Expose
+    @SerializedName("deleted_at") val deleted_at: String
+    )
