@@ -9,4 +9,3 @@ interface JobRecentAPI {
     @GET("recentjobs")
     fun getJobsRecent(): Call<List<JobRecent>>
 }
-

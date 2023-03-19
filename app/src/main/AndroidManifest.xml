@@ -15,7 +15,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".EmployerApplicationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmployerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Company2Activity"
             android:exported="false" />
         <activity
             android:name=".CompanyActivity"
@@ -34,9 +43,6 @@
             android:exported="false" />
         <activity
             android:name=".ApplicationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

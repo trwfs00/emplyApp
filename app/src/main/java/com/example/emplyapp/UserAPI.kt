@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface UserAPI {
-
     @FormUrlEncoded
     @POST("register")
     fun insertUser(
@@ -20,6 +19,55 @@ interface UserAPI {
         @Path("username") username: String,
         @Path("password") password: String
     ): Call<LoginUserClass>
+
+    @GET("login/{username}")
+    fun getLoginId(
+        @Path("username") username: String
+    ):Call<RoleClass>
+
+    @GET("fetch/{username}")
+    fun fetchUserData(@Path("username") username: String): Call<UserDataClass>
+
+    @FormUrlEncoded
+    @POST("jobseeker")
+    fun insertProfile(
+        @Field("fullName") fullName: String,
+        @Field("nickName") nickName: String,
+        @Field("birthday") birthday: String,
+        @Field("phone") phone: String,
+        @Field("gender") gender: Int,
+        @Field("email") email: String,
+        @Field("Login_id") Login_id: Int,
+        @Field("country_id") country_id: Int,
+        @Field("picture") picture: String
+    ):Call<Jobseeker>
+
+    @FormUrlEncoded
+    @POST("employer")
+    fun insertEmployer(
+        @Field("fullName") fullName: String,
+        @Field("nickName") nickName: String,
+        @Field("birthday") birthday: String,
+        @Field("phone") phone: String,
+        @Field("gender") gender: Int,
+        @Field("email") email: String,
+        @Field("empcard") empcard: String,
+        @Field("status") status: Int,
+        @Field("dept") dept: String,
+        @Field("Login_id") Login_id: Int,
+        @Field("company_id") company_id: Int,
+        @Field("country_id") country_id: Int
+    ):Call<EmployerClass>
+
+    @FormUrlEncoded
+    @POST("company")
+    fun insertCompany(
+        @Field("company_name") company_name: String,
+        @Field("country") country: String,
+        @Field("state") state: String,
+        @Field("address") address: String,
+        @Field("logo") logo: String
+    ):Call<CompanyClass>
 
     companion object
     {

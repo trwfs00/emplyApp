@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateProfileActivity"
-    android:orientation="vertical"
-    android:scrollbars="none">
+    tools:context=".CompanyActivity">
     <RelativeLayout
-        android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="30dp">
@@ -27,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:visibility="visible" />
             <TextView
-                android:id="@+id/textCompany"
+                android:id="@+id/txtTitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Company Enroll"
@@ -40,129 +37,124 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1/2"
-                android:textSize="16sp"
+                android:layout_marginTop="6dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/font_dark"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <TextView
-            android:id="@+id/text"
-            android:layout_below="@id/titleBar"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtSubtitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="In order to assist you better, we need some basic information about your company"/>
+            android:layout_marginVertical="16dp"
+            android:textSize="18dp"
+            android:text="In order to assist you better, we need some basic information about your company"
+            android:layout_below="@id/titleBar" />
         <View
-            android:id="@+id/line"
+            android:id="@+id/lineNormal"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@id/text"
-            android:layout_marginTop="20dp"
-            android:background="@color/font_inbox" />
+            android:layout_height="1dp"
+            android:layout_below="@id/txtSubtitle"
+            android:background="@color/font_inbox"/>
         <LinearLayout
-            android:id="@+id/CompanyName"
+            android:id="@+id/formNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/line"
+            android:layout_below="@id/lineNormal"
             android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtCompanyName"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_box"
-                android:layout_marginTop="10dp"
-                android:inputType="text"
-                android:hint="Company Name"
-                android:paddingHorizontal="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/Country"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtCompanyName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/CompanyName"
-            android:orientation="vertical">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtCountry"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_box"
-                android:layout_marginTop="10dp"
-                android:inputType="text"
-                android:hint="Country"
-                android:paddingHorizontal="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/state"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_box"
+            android:layout_marginTop="18dp"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:hint="Company Name"
+            android:paddingHorizontal="20dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtCountry"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Country"
-            android:orientation="vertical">
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_box"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:hint="Country"
+            android:paddingHorizontal="20dp"/>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtState"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_box"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
                 android:inputType="text"
-                android:hint="state"
+                android:hint="State"
                 android:paddingHorizontal="20dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/state"
-            android:orientation="vertical">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtDateBirthday"
+                android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_box"
-                android:layout_marginTop="10dp"
-                android:gravity="top"
                 android:hint="Address"
-                android:inputType="textMultiLine"
-                android:paddingHorizontal="20dp"/>
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:textSize="16sp" />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/uploadResume"
+        <TextView
+            android:id="@+id/txtUpload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/address"
-            android:orientation="vertical">
-            <TextView
+            android:text="Upload your company logo"
+            android:textColor="@color/font_dark"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="18sp"
+            android:layout_below="@id/formNormal"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_below="@id/txtUpload"
+            android:background="@drawable/rounded_box">
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload your company logo"
-                android:layout_marginTop="20dp"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUploadResume"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@drawable/rounded_box"
-                android:layout_marginTop="10dp"
-                android:hint="Browse Image"
-                android:paddingHorizontal="20dp"/>
-        </LinearLayout>
-
+                android:layout_centerInParent="true">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/image" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Image"
+                    android:layout_below="@id/img"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="112dp"
-    android:background="#FFFFFF"
-    android:paddingHorizontal="30dp"
-    android:layout_alignParentBottom="true">
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnContinue"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/rounded_primary_box"
-        android:text="Continue"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
-</RelativeLayout>
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="24dp"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:background="@drawable/rounded_max_primary_box"/>
+    </RelativeLayout>
 </RelativeLayout>
