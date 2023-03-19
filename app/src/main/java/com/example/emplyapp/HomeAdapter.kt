@@ -33,6 +33,7 @@ class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?,val categoryList: Arra
 //        init {
 //            binding.jobCategory.setOnClickListener {
 //                val context: Context = view.context
+//
 //                val intent = Intent(context, HomeActivity::class.java)
 //                intent.putExtra("category_name", categoryList[adapterPosition].category_name)
 //                context.startActivity(intent)
