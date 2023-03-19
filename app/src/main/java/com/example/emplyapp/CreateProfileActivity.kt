@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.ActivityCreateProfileBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,7 +82,7 @@ class CreateProfileActivity : AppCompatActivity() {
                         email = KEY_EMAIL,
                         Login_id = KEY_LOGIN_ID!!.toInt(),
                         country_id = KEY_COUNTRY_ID!!.toInt(),
-                        picture = KEY_IMAGE_PATH!!
+                        picture_jobseek = KEY_IMAGE_PATH.toString()
                     ).enqueue(object : Callback<Jobseeker> {
                         override fun onResponse(
                             call: Call<Jobseeker>,
@@ -90,6 +91,7 @@ class CreateProfileActivity : AppCompatActivity() {
                             if (response.isSuccessful) {
                                 val i: Intent = Intent(applicationContext, HomeActivity::class.java)
                                 startActivity(i)
+                                finish()
                             } else {
                                 Toast.makeText(
                                     applicationContext,
@@ -119,6 +121,7 @@ class CreateProfileActivity : AppCompatActivity() {
                             i.putExtra("country_id", KEY_COUNTRY_ID)
                             i.putExtra("image", KEY_IMAGE_PATH)
                             startActivity(i)
+                            finish()
                 }
             } else if (KEY_IMAGE_PATH === null) {
                 Toast.makeText(applicationContext,"Please provide your Photo url",Toast.LENGTH_SHORT).show()
@@ -145,12 +148,20 @@ class CreateProfileActivity : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(this)
 
         val editText = EditText(this)
+        editText.setText(if(KEY_IMAGE_PATH != null) KEY_IMAGE_PATH else "")
         dialogBuilder.setTitle("PHOTO URL")
             .setView(editText)
             .setPositiveButton("OK") { dialogInterface, i ->
                 val inputText = editText.text.toString()
-                KEY_IMAGE_PATH = inputText
-                Toast.makeText(applicationContext, "You entered: $inputText", Toast.LENGTH_SHORT).show()
+                if (isValidImageUrl(inputText)) {
+                    KEY_IMAGE_PATH = inputText
+                    Glide.with(applicationContext)
+                        .load(KEY_IMAGE_PATH)
+                        .into(binding.edtProfile)
+                    Toast.makeText(applicationContext, "You entered: $inputText", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, "Invalid image URL", Toast.LENGTH_SHORT).show()
+                }
             }
             .setNegativeButton("Cancel") { dialogInterface, i ->
                 dialogInterface.cancel()
@@ -158,6 +169,11 @@ class CreateProfileActivity : AppCompatActivity() {
 
         val alertDialog = dialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun isValidImageUrl(url: String): Boolean {
+        val pattern = ".*\\.(jpg|jpeg|png|gif|bmp)".toRegex()
+        return pattern.matches(url)
     }
 
     private fun callDataUserId(username: String) {
