@@ -1,6 +1,7 @@
 package com.example.emplyapp
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.emplyapp.databinding.CategoryItemLayoutBinding
 import com.example.emplyapp.databinding.JobRecentItemLayoutBinding
 import java.sql.DriverManager
 import java.time.Duration
@@ -20,14 +22,27 @@ import java.time.*
 import java.time.temporal.ChronoUnit
 
 
-class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context):
+class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?,val categoryList: ArrayList<CategoryClass>, val context: Context):
     RecyclerView.Adapter<HomeAdapter.ViewHolder>(){
+
     inner class ViewHolder(view: View, val binding: JobRecentItemLayoutBinding):
         RecyclerView.ViewHolder(view){
     }
-
+//    inner class ViewHolder(view: View, val binding: CategoryItemLayoutBinding) :
+//        RecyclerView.ViewHolder(view) {
+//        init {
+//            binding.jobCategory.setOnClickListener {
+//                val context: Context = view.context
+//                val intent = Intent(context, HomeActivity::class.java)
+//                intent.putExtra("category_name", categoryList[adapterPosition].category_name)
+//                context.startActivity(intent)
+//            }
+//        }
+//    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = JobRecentItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        //val binding = CategoryItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding.root,binding)
     }
 
@@ -35,11 +50,12 @@ class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
 
+        //binding.jobCategory.text = "${categoryList!![position].category_name}"
+
         binding.jobName?.text = "${JobRecentlist!![position].job_name}"
         binding.jobInc?.text = "${JobRecentlist!![position].company_name}"
         binding.jobCountry?.text = "${JobRecentlist!![position].nicename}"
         binding.jobType?.text = "${JobRecentlist!![position].type}"
-
         binding.jobTime?.text = "${diffForHuman(JobRecentlist!![position].created_at)}"
         Glide.with(context).load(JobRecentlist[position].logo).into(binding.imgJob)
     }
@@ -54,9 +70,9 @@ class HomeAdapter(val JobRecentlist:ArrayList<JobRecent>?, val context: Context)
 
         return when {
             duration.toMinutes() < 1 -> "just now"
-            duration.toMinutes() < 60 -> "${duration.toMinutes()} minutes ago"
-            duration.toHours() < 24 -> "${duration.toHours()} hours ago"
-            duration.toDays() < 7 -> "${duration.toDays()} days ago"
+            duration.toMinutes() < 60 -> "${duration.toMinutes()} m"
+            duration.toHours() < 24 -> "${duration.toHours()} hr"
+            duration.toDays() < 7 -> "${duration.toDays()} d"
             else -> "on ${createdAtDateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))}"
         }
     }
