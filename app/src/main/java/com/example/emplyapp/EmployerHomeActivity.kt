@@ -12,6 +12,12 @@ class EmployerHomeActivity : AppCompatActivity() {
         binding = ActivityEmployerHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnPostjob.setOnClickListener {
+            var i: Intent = Intent(applicationContext, PostJob1Activity::class.java)
+            startActivity(i)
+            finish()
+        }
+
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {

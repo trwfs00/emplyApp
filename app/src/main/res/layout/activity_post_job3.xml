@@ -56,7 +56,7 @@
                 android:textColor="@color/font_dark"
                 android:layout_marginTop="22dp"/>
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtQualifications"
+                android:id="@+id/edtPerksandBenefits"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_box"

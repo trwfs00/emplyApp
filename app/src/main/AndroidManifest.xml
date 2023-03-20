@@ -18,6 +18,21 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
+            android:name=".PostJob1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".PostJob2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".PostJob3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".PostJob4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".PostJob5Activity"
+            android:exported="false" />
+        <activity
             android:name=".EmployerHomeActivity"
             android:exported="false" />
         <activity

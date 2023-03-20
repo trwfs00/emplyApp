@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Job Description"
+                android:text="Name and Description"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="16dp"
@@ -50,6 +50,23 @@
             android:layout_above="@id/layoutButtom"
             android:orientation="vertical"
             android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Job Name"
+                android:textColor="@color/font_dark"
+                android:layout_marginTop="22dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_box"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:inputType="textLongMessage"
+                android:hint="Name"
+                android:paddingHorizontal="20dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

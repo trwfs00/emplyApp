@@ -14,38 +14,50 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListener {
-    private lateinit var bindingPostJob4: ActivityPostJob4Binding
+    private lateinit var bindingPJ4: ActivityPostJob4Binding
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
 
+    var KEY_DESCRIPTION :String? = null
+    var KEY_QUALIFICATIONS :String? = null
+    var KEY_PAB :String? = null
+
+    var KEY_NAME :String? = null
     var KEY_CATEGORY_ID: String? = null
     var KEY_CATEGORY_NAME: String? = null
-    var KEY_USERNAME: String? = null
 
     private var CategoryList = ArrayList<CategoryClass>()
     val categoryClient = CategoryAPI.create()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingPostJob4 = ActivityPostJob4Binding.inflate(layoutInflater)
-        setContentView(bindingPostJob4.root)
+        bindingPJ4 = ActivityPostJob4Binding.inflate(layoutInflater)
+        setContentView(bindingPJ4.root)
 
-        recyclerView = bindingPostJob4.recyclerViewCategory
-        searchView = bindingPostJob4.searchViewPerksNBenefits
+        var intent: Intent = getIntent()
+        KEY_NAME = intent.getStringExtra("NAME")
+        KEY_DESCRIPTION = intent.getStringExtra("DESCRIPTION")
+        KEY_QUALIFICATIONS = intent.getStringExtra("QUALIFICATIONS")
+        KEY_PAB = intent.getStringExtra("PAB")
+
+        recyclerView = bindingPJ4.recyclerViewCategory
+        searchView = bindingPJ4.searchViewPerksNBenefits
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        bindingPostJob4.btnContinue.setOnClickListener {
-            if(KEY_CATEGORY_ID != null && KEY_CATEGORY_NAME != null && KEY_USERNAME != null) {
+        bindingPJ4.btnContinue.setOnClickListener {
+            if(KEY_CATEGORY_ID != null && KEY_CATEGORY_NAME != null) {
                 val i = Intent(applicationContext,PostJob5Activity::class.java)
-                i.putExtra("COUNTRY_ID" , KEY_CATEGORY_ID)
-                i.putExtra("COUNTRY_NAME" , KEY_CATEGORY_NAME)
+                i.putExtra("CATEGORY_ID" , KEY_CATEGORY_ID)
+                i.putExtra("CATEGORY_NAME" , KEY_CATEGORY_NAME)
+                i.putExtra("NAME" , KEY_NAME)
+                i.putExtra("DESCRIPTION" , KEY_DESCRIPTION)
+                i.putExtra("QUALIFICATIONS" , KEY_QUALIFICATIONS)
+                i.putExtra("PAB" , KEY_PAB)
                 startActivity(i)
             } else {
                 Toast.makeText(applicationContext,"Please select your country",Toast.LENGTH_LONG).show()
             }
         }
-
-        bindingPostJob4.txtCheckValue.text = KEY_CATEGORY_ID+" "+KEY_CATEGORY_NAME+" "+KEY_USERNAME
     }
 
     override fun onResume() {
@@ -61,7 +73,11 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                fetchUsers(newText)
+                if (newText.isEmpty()) {
+                    callCategoryData()
+                } else {
+                    fetchUsers(newText)
+                }
                 return true
             }
 
@@ -77,9 +93,9 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
                     response: Response<List<CategoryClass>>
                 ) {
                     response.body()?.forEach {
-                        CategoryList.add(CategoryClass(it.category_name, it.detail))
+                        CategoryList.add(CategoryClass(it.category_id, it.category_name, it.detail))
                     }
-                    bindingPostJob4.recyclerViewCategory.adapter = CategoryAdapter(CategoryList
+                    bindingPJ4.recyclerViewCategory.adapter = CategoryAdapter(CategoryList
                         ,this@PostJob4Activity)
                 }
 
@@ -92,17 +108,17 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
 
     fun fetchUsers(key: String) {
         CategoryList.clear()
-        if (bindingPostJob4.searchViewPerksNBenefits.isNotEmpty()) {
-            categoryClient.getCategory(key)
+        if (bindingPJ4.searchViewPerksNBenefits.isNotEmpty()) {
+            categoryClient.getCategoryKey(key)
                 .enqueue(object : Callback<List<CategoryClass>>, CategoryAdapter.onItemClickListener {
                     override fun onResponse(
                         call: Call<List<CategoryClass>>,
                         response: Response<List<CategoryClass>>
                     ) {
                         response.body()?.forEach {
-                            CategoryList.add(CategoryClass(it.category_name, it.detail))
+                            CategoryList.add(CategoryClass(it.category_id, it.category_name, it.detail))
                         }
-                        bindingPostJob4.recyclerViewCategory.adapter = CategoryAdapter(CategoryList
+                        bindingPJ4.recyclerViewCategory.adapter = CategoryAdapter(CategoryList
                             ,this@PostJob4Activity)
                     }
 
@@ -125,9 +141,9 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
     }
 
     override fun onClick(position: Int) {
-        KEY_CATEGORY_ID = CategoryList[position].category_name.toString()
-        KEY_CATEGORY_NAME = CategoryList[position].detail
+        KEY_CATEGORY_ID = CategoryList[position].category_id.toString()
+        KEY_CATEGORY_NAME = CategoryList[position].category_name
         Toast.makeText(applicationContext,KEY_CATEGORY_NAME,Toast.LENGTH_SHORT).show()
-        bindingPostJob4.txtCheckValue.text = KEY_CATEGORY_ID+" "+KEY_CATEGORY_NAME+" "+KEY_USERNAME
+        bindingPJ4.txtCheckValue.text = KEY_CATEGORY_ID+" "+KEY_CATEGORY_NAME
     }
 }

@@ -71,6 +71,21 @@ interface UserAPI {
         @Field("logo") logo: String
     ):Call<CompanyClass>
 
+    @FormUrlEncoded
+    @POST("jobs")
+    fun insertJobs(
+        @Field("job_name") job_name: String,
+        @Field("salaryFrom") salaryFrom: Int,
+        @Field("salaryTo") salaryTo: Int,
+        @Field("description") description: String,
+        @Field("minimumQualification") minimumQualification: String,
+        @Field("type") type: String,
+        @Field("category_id") category_id: Int,
+        @Field("employer_id") employer_id: Int,
+        @Field("benefit") benefit: String,
+        @Field("code") code: String
+    ):Call<JobsClass>
+
     companion object
     {
         fun create():UserAPI {
