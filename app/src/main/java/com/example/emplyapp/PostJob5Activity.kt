@@ -21,12 +21,11 @@ class PostJob5Activity : AppCompatActivity() {
     var KEY_QUALIFICATIONS :String? = null
     var KEY_PAB :String? = null
 
-    var KEY_CATEGORY_ID: String? = null
+    var KEY_CATEGORY_ID: Int? = null
     var KEY_CATEGORY_NAME: String? = null
 
     var type: String = ""
     var CurrencyItem: String = ""
-    var emp_id : Int? = null
 
     private var CurrencyList = ArrayList<CurrencyClass>()
     val createClient = CurrencyAPI.create()
@@ -41,17 +40,16 @@ class PostJob5Activity : AppCompatActivity() {
         KEY_DESCRIPTION = intent.getStringExtra("DESCRIPTION")
         KEY_QUALIFICATIONS = intent.getStringExtra("QUALIFICATIONS")
         KEY_PAB = intent.getStringExtra("PAB")
-        KEY_CATEGORY_ID = intent.getStringExtra("CATEGORY_ID")
+        KEY_CATEGORY_ID = intent.getIntExtra("CATEGORY_ID", 0)
         KEY_CATEGORY_NAME = intent.getStringExtra("CATEGORY_NAME")
 
         showDropdown()
         session = SessionManager(applicationContext)
-        var emp_id : Int? = session.pref.getString(SessionManager.KEY_ID, null)!!.toInt()
+        var emp_id : Int = session.pref.getString(SessionManager.KEY_ID, null)!!.toInt()
 
         bindingPJ5.btnPost.setOnClickListener {
             addListenerOnButton()
-            addUserEmp()
-            bindingPJ5.txtCheckValue.text = KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+emp_id+" "+KEY_PAB+" "+CurrencyItem
+            addJobs()
         }
     }
 
@@ -85,29 +83,28 @@ class PostJob5Activity : AppCompatActivity() {
 
     }
 
-    fun addUserEmp() {
-        var emp_id : Int? = session.pref.getString(SessionManager.KEY_ID, null)!!.toInt()
+    fun addJobs() {
+        var emp_id : Int = session.pref.getString(SessionManager.KEY_ID, null)!!.toInt()
+        Toast.makeText(applicationContext, "ไม่เข้าInsert", Toast.LENGTH_SHORT).show()
         insertClient.insertJobs(
-            job_name = KEY_NAME!!,
+            job_name = KEY_NAME.toString(),
             salaryFrom = bindingPJ5.edtMin.text.toString().toInt(),
             salaryTo = bindingPJ5.edtMax.text.toString().toInt(),
-            description = KEY_DESCRIPTION!!,
-            minimumQualification = KEY_QUALIFICATIONS!!,
+            description = KEY_DESCRIPTION.toString(),
+            minimumQualification = KEY_QUALIFICATIONS.toString(),
             type = type,
-            category_id = KEY_CATEGORY_ID!!.toInt(),
-            employer_id = emp_id!!,
-            benefit = KEY_PAB!!,
+            category_id = KEY_CATEGORY_ID.toString().toInt(),
+            employer_id = emp_id,
+            benefit = KEY_PAB.toString(),
             code = CurrencyItem
             ).enqueue(object : Callback<JobsClass> {
 
             override fun onResponse(call: Call<JobsClass>, response: Response<JobsClass>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(
-                        applicationContext,
-                        "Successfully Register",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(applicationContext, "Successfully Register", Toast.LENGTH_LONG).show()
                     bindingPJ5.txtCheckValue.text = KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+emp_id+" "+KEY_PAB+" "+CurrencyItem
+                } else {
+                    Toast.makeText(applicationContext, "เข้า Insert เข้า else", Toast.LENGTH_SHORT).show()
                 }
             }
 

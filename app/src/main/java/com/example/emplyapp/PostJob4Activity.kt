@@ -23,7 +23,7 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
     var KEY_PAB :String? = null
 
     var KEY_NAME :String? = null
-    var KEY_CATEGORY_ID: String? = null
+    var KEY_CATEGORY_ID: Int? = null
     var KEY_CATEGORY_NAME: String? = null
 
     private var CategoryList = ArrayList<CategoryClass>()
@@ -38,6 +38,7 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
         KEY_DESCRIPTION = intent.getStringExtra("DESCRIPTION")
         KEY_QUALIFICATIONS = intent.getStringExtra("QUALIFICATIONS")
         KEY_PAB = intent.getStringExtra("PAB")
+        bindingPJ4.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+KEY_PAB
 
         recyclerView = bindingPJ4.recyclerViewCategory
         searchView = bindingPJ4.searchViewPerksNBenefits
@@ -47,7 +48,7 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
         bindingPJ4.btnContinue.setOnClickListener {
             if(KEY_CATEGORY_ID != null && KEY_CATEGORY_NAME != null) {
                 val i = Intent(applicationContext,PostJob5Activity::class.java)
-                i.putExtra("CATEGORY_ID" , KEY_CATEGORY_ID)
+                i.putExtra("CATEGORY_ID" , KEY_CATEGORY_ID.toString().toInt())
                 i.putExtra("CATEGORY_NAME" , KEY_CATEGORY_NAME)
                 i.putExtra("NAME" , KEY_NAME)
                 i.putExtra("DESCRIPTION" , KEY_DESCRIPTION)
@@ -141,9 +142,9 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
     }
 
     override fun onClick(position: Int) {
-        KEY_CATEGORY_ID = CategoryList[position].category_id.toString()
+        KEY_CATEGORY_ID = CategoryList[position].category_id.toString().toInt()
         KEY_CATEGORY_NAME = CategoryList[position].category_name
         Toast.makeText(applicationContext,KEY_CATEGORY_NAME,Toast.LENGTH_SHORT).show()
-        bindingPJ4.txtCheckValue.text = KEY_CATEGORY_ID+" "+KEY_CATEGORY_NAME
+        bindingPJ4.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+KEY_PAB+" "+KEY_CATEGORY_ID.toString()+" "+KEY_CATEGORY_NAME
     }
 }

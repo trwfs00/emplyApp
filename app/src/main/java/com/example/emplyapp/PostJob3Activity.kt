@@ -22,6 +22,7 @@ class PostJob3Activity : AppCompatActivity() {
         KEY_NAME = intent.getStringExtra("NAME")
         KEY_DESCRIPTION = intent.getStringExtra("DESCRIPTION")
         KEY_QUALIFICATIONS = intent.getStringExtra("QUALIFICATIONS")
+        bindingPJ3.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS
 
         bindingPJ3.btnContinue.setOnClickListener {
             KEY_PAB = bindingPJ3.edtPerksandBenefits.text.toString()
