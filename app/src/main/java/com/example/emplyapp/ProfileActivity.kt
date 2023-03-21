@@ -124,7 +124,30 @@ class ProfileActivity : AppCompatActivity() {
                         }
                     })
                 } else {
-                    var way = ""
+                    createClient.softDeleteEmployer(
+                        Login_id = KEY_LOGIN_ID!!
+                    ).enqueue(object : Callback<UserDataClass>{
+                        override fun onResponse(
+                            call: Call<UserDataClass>,
+                            response: Response<UserDataClass>
+                        ) {
+                            if(response.isSuccessful) {
+                                Toast.makeText(applicationContext, "Successfully Deleted", Toast.LENGTH_SHORT).show()
+                                val edit = session.edior
+                                edit.clear()
+                                edit.commit()
+                                var i: Intent = Intent(applicationContext, MainActivity::class.java)
+                                startActivity(i)
+                                finish()
+                            } else {
+                                Toast.makeText(applicationContext, "Failed on attempt to deactivate account...", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<UserDataClass>, t: Throwable) {
+                            Toast.makeText(applicationContext, "Failed on ${t.message.toString()}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
                 }
             }
             builder.setNegativeButton("No", null)
