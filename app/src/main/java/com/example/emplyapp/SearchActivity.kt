@@ -31,7 +31,7 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.onItemClickListener {
     override fun onResume() {
         super.onResume()
         setupSearchView()
-        callCountryData()
+        callJobData()
 
     }
 
@@ -42,15 +42,20 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.onItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                fetchUsers(newText)
-                bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
+                if (newText.isEmpty()) {
+                    callJobData()
+                    bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
+                } else {
+                    fetchJobs(newText)
+                    bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
+                }
                 return true
             }
 
         })
     }
 
-    fun callCountryData() {
+    fun callJobData() {
         SearchList.clear()
         searchClient.getAllSearch()
             .enqueue(object : Callback<List<SearchClass>> {
@@ -73,7 +78,7 @@ class SearchActivity : AppCompatActivity(), SearchAdapter.onItemClickListener {
             })
     }
 
-    fun fetchUsers(key: String) {
+    fun fetchJobs(key: String) {
         SearchList.clear()
         if (bindingSearchActivity.searchViewSearch.isNotEmpty()) {
             searchClient.getSearch(key)

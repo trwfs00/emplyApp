@@ -30,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
         binding.txtUsername.text = username
 
         binding.searchBar.setOnClickListener {
-            Toast.makeText(applicationContext, "WorkBAR", Toast.LENGTH_SHORT).show()
             var intent = Intent(applicationContext, SearchActivity::class.java)
             startActivity(intent)
         }
