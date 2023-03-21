@@ -44,8 +44,17 @@ interface UserAPI {
     ):Call<Jobseeker>
 
     @FormUrlEncoded
-    @PUT("profile/{Login_id}")
-    fun editProfile(
+    @PUT("jobseeker/{Login_id}")
+    fun editJobseeker(
+        @Field("fullName") fullName: String,
+        @Field("nickName") nickName: String,
+        @Field("birthday") birthday: String,
+        @Path("Login_id") Login_id: Int
+    ):Call<ProfileClass>
+
+    @FormUrlEncoded
+    @PUT("employer/{Login_id}")
+    fun editEmployer(
         @Field("fullName") fullName: String,
         @Field("nickName") nickName: String,
         @Field("birthday") birthday: String,

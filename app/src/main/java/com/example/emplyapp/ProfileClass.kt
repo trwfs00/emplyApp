@@ -14,5 +14,11 @@ data class ProfileClass(
     @SerializedName("birthday") val birthday: String,
 
     @Expose
+    @SerializedName("picture_jobseek") val picture_jobseek: String,
+
+    @Expose
+    @SerializedName("picture_emp") val picture_emp: String,
+
+    @Expose
     @SerializedName("Login_id") val Login_id: Int
 )

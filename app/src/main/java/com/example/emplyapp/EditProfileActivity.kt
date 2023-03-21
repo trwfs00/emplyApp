@@ -39,50 +39,25 @@ class EditProfileActivity : AppCompatActivity() {
         KEY_USERNAME?.let { getUserData(it) }
 
         binding.btnSave.setOnClickListener {
-
+            KEY_USERNAME?.let { getUserData(it) }
             if (KEY_ROLE == 0){
-                createClient.editProfile(
-                    /*fullName = KEY_FULLNAME!!,
-                    nickName = KEY_NICKNAME!!,
-                    birthday = KEY_BIRTHDAY!!,
-                    Login_id = KEY_LOGIN_ID!!.toInt()*/
-                    binding.edtFullname.toString(),
-                    binding.edtNickname.toString(),
-                    binding.edtDateBirthday.toString(),
-                    session.pref.getString(SessionManager.KEY_ID,null).toString().toInt()
+                createClient.editJobseeker(
+                    fullName = KEY_FULLNAME.toString(),
+                    nickName = KEY_NICKNAME.toString(),
+                    birthday = KEY_BIRTHDAY.toString(),
+                    Login_id = KEY_LOGIN_ID!!
                 ).enqueue(object : Callback<ProfileClass>{
                     override fun onResponse(call: Call<ProfileClass>, response: Response<ProfileClass>) {
                         Toast.makeText(applicationContext,"${binding.edtFullname} ${binding.edtNickname}",Toast.LENGTH_LONG).show()
-                        /*if (response.isSuccessful){
-                            val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
-                            startActivity(i)
-                        }else{
+                        if (response.isSuccessful){
                             Toast.makeText(
                                 applicationContext,
-                                "Failed to update data.",
+                                "Successfully [JSK] updated",
                                 Toast.LENGTH_LONG
                             )
                                 .show()
-                        }*/
-                    }
-
-
-                    override fun onFailure(call: Call<ProfileClass>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG)
-                            .show()
-                    }
-                })
-            }else{
-                createClient.editProfile(
-                    binding.edtFullname.toString(),
-                    binding.edtNickname.toString(),
-                    binding.edtDateBirthday.toString(),
-                    session.pref.getString(SessionManager.KEY_ID,null).toString().toInt()
-                ).enqueue(object : Callback<ProfileClass>{
-                    override fun onResponse(call: Call<ProfileClass>, response: Response<ProfileClass>) {
-                        if (response.isSuccessful){
-                            val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
-                            startActivity(i)
+                            /*val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
+                            startActivity(i)*/
                         }else{
                             Toast.makeText(
                                 applicationContext,
@@ -92,8 +67,38 @@ class EditProfileActivity : AppCompatActivity() {
                                 .show()
                         }
                     }
-
-
+                    override fun onFailure(call: Call<ProfileClass>, t: Throwable) {
+                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG)
+                            .show()
+                    }
+                })
+            }else if (KEY_ROLE == 1) {
+                createClient.editEmployer(
+                    fullName = KEY_FULLNAME.toString(),
+                    nickName = KEY_NICKNAME.toString(),
+                    birthday = KEY_BIRTHDAY.toString(),
+                    Login_id = KEY_LOGIN_ID!!
+                ).enqueue(object : Callback<ProfileClass>{
+                    override fun onResponse(call: Call<ProfileClass>, response: Response<ProfileClass>) {
+                        Toast.makeText(applicationContext,"${binding.edtFullname} ${binding.edtNickname}",Toast.LENGTH_LONG).show()
+                        if (response.isSuccessful){
+                            Toast.makeText(
+                                applicationContext,
+                                "Successfully [EMP] updated",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            /*val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
+                            startActivity(i)*/
+                        }else{
+                            Toast.makeText(
+                                applicationContext,
+                                "Failed to update data.",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                        }
+                    }
                     override fun onFailure(call: Call<ProfileClass>, t: Throwable) {
                         Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG)
                             .show()
