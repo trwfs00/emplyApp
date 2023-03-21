@@ -145,6 +145,5 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
         KEY_CATEGORY_ID = CategoryList[position].category_id.toString().toInt()
         KEY_CATEGORY_NAME = CategoryList[position].category_name
         Toast.makeText(applicationContext,KEY_CATEGORY_NAME,Toast.LENGTH_SHORT).show()
-        bindingPJ4.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+KEY_PAB+" "+KEY_CATEGORY_ID.toString()+" "+KEY_CATEGORY_NAME
     }
 }

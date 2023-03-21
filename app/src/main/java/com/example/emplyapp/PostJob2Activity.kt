@@ -20,7 +20,6 @@ class PostJob2Activity : AppCompatActivity() {
         var intent: Intent = getIntent()
         KEY_NAME = intent.getStringExtra("NAME")
         KEY_DESCRIPTION = intent.getStringExtra("DESCRIPTION")
-        bindingPJ2.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION
 
         bindingPJ2.btnContinue.setOnClickListener {
             KEY_QUALIFICATIONS = bindingPJ2.edtQualifications.text.toString()

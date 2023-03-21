@@ -62,8 +62,6 @@ class PostJob5Activity : AppCompatActivity() {
         KEY_CATEGORY_ID = intent.getIntExtra("CATEGORY_ID", 0)
         KEY_CATEGORY_NAME = intent.getStringExtra("CATEGORY_NAME")
 
-        bindingPJ5.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+KEY_PAB+" "+KEY_CATEGORY_NAME+"ID:[$KEY_CATEGORY_ID]"
-
         showDropdown()
         session = SessionManager(applicationContext)
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null).toString()
@@ -125,8 +123,6 @@ class PostJob5Activity : AppCompatActivity() {
                     KEY_COMPANY_ID = response.body()?.company_id
                     KEY_STATUS = response.body()?.status
                     KEY_EMPLOYER_ID = response.body()?.employer_id
-
-                    bindingPJ5.txtCheckValue.text = bindingPJ5.txtCheckValue.text.toString()+" $KEY_USERNAME[EMP-ID:$KEY_EMPLOYER_ID]"
                 } else {
                     Toast.makeText(applicationContext,"Failure on calling user data...", Toast.LENGTH_SHORT).show()
                 }
@@ -155,15 +151,16 @@ class PostJob5Activity : AppCompatActivity() {
             override fun onResponse(call: Call<JobsClass>, response: Response<JobsClass>) {
                 if (response.isSuccessful) {
                     Toast.makeText(applicationContext, "Successfully Register", Toast.LENGTH_LONG).show()
-                    bindingPJ5.txtCheckValue.text = KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+KEY_EMPLOYER_ID+" "+KEY_PAB+" "+CurrencyItem
+                    var i: Intent = Intent(applicationContext, EmployerHomeActivity::class.java)
+                    startActivity(i)
+                    finish()
                 } else {
-                    Toast.makeText(applicationContext, "เข้า Insert เข้า else", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Failed on posting job..", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<JobsClass>, t: Throwable) {
                 Toast.makeText(applicationContext, "Error onFailure: " + t.message, Toast.LENGTH_LONG).show()
-                bindingPJ5.txtCheckValue.text = t.message.toString()+"\n\n\n\n"+KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+KEY_EMPLOYER_ID+" "+KEY_PAB+" "+CurrencyItem
             }
         })
     }
