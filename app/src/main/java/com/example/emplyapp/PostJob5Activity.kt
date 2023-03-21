@@ -166,6 +166,7 @@ class PostJob5Activity : AppCompatActivity() {
 
             override fun onFailure(call: Call<JobsClass>, t: Throwable) {
                 Toast.makeText(applicationContext, "Error onFailure: " + t.message, Toast.LENGTH_LONG).show()
+                bindingPJ5.txtCheckValue.text = t.message.toString()
             }
         })
     }
