@@ -70,6 +70,7 @@ class PostJob5Activity : AppCompatActivity() {
         getUserData(KEY_USERNAME.toString())
 
         bindingPJ5.btnPost.setOnClickListener {
+            addListenerOnButton()
             addJobs()
         }
     }
@@ -137,11 +138,7 @@ class PostJob5Activity : AppCompatActivity() {
     }
 
     fun addJobs() {
-        var selectID: Int = bindingPJ5.radioGType.checkedRadioButtonId
-        var radioButtonChecked: RadioButton = findViewById(selectID)
-        type = radioButtonChecked.text as String
         getUserData(KEY_USERNAME.toString())
-
         insertClient.insertJobs(
             job_name = KEY_NAME.toString(),
             salaryFrom = bindingPJ5.edtMin.text.toString().toInt(),
@@ -150,7 +147,7 @@ class PostJob5Activity : AppCompatActivity() {
             minimumQualification = KEY_QUALIFICATIONS.toString(),
             type = type,
             category_id = KEY_CATEGORY_ID.toString().toInt(),
-            employer_id = KEY_EMPLOYER_ID!!,
+            employer_id = KEY_EMPLOYER_ID!!.toInt(),
             benefit = KEY_PAB.toString(),
             code = CurrencyItem
             ).enqueue(object : Callback<JobsClass> {
@@ -166,7 +163,7 @@ class PostJob5Activity : AppCompatActivity() {
 
             override fun onFailure(call: Call<JobsClass>, t: Throwable) {
                 Toast.makeText(applicationContext, "Error onFailure: " + t.message, Toast.LENGTH_LONG).show()
-                bindingPJ5.txtCheckValue.text = t.message.toString()
+                bindingPJ5.txtCheckValue.text = t.message.toString()+"\n\n\n\n"+KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+KEY_EMPLOYER_ID+" "+KEY_PAB+" "+CurrencyItem
             }
         })
     }
