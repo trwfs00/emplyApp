@@ -188,14 +188,18 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/font_dark" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/JobRecentRycyclerView"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/RececntJobs"
-                android:layout_marginTop="5dp"
-                tools:itemCount="2"
-                tools:listitem="@layout/job_recent_item_layout"/>
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/JobRecentRycyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/RececntJobs"
+                    android:layout_marginTop="5dp"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/job_recent_item_layout"/>
+            </ScrollView>
         </RelativeLayout>
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
