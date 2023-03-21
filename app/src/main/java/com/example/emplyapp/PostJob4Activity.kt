@@ -38,7 +38,6 @@ class PostJob4Activity : AppCompatActivity(), CategoryAdapter.onItemClickListene
         KEY_DESCRIPTION = intent.getStringExtra("DESCRIPTION")
         KEY_QUALIFICATIONS = intent.getStringExtra("QUALIFICATIONS")
         KEY_PAB = intent.getStringExtra("PAB")
-        bindingPJ4.txtCheckValue.text = KEY_NAME+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+KEY_PAB
 
         recyclerView = bindingPJ4.recyclerViewCategory
         searchView = bindingPJ4.searchViewPerksNBenefits
