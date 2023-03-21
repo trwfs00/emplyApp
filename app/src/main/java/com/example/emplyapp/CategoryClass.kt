@@ -7,18 +7,23 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoryClass(
     @Expose
+    @SerializedName("category_id") val category_id  : Int,
+
+    @Expose
     @SerializedName("category_name") val category_name : String? = null,
 
     @Expose
     @SerializedName("detail") val detail : String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(category_id)
         parcel.writeString(category_name)
         parcel.writeString(detail)
     }

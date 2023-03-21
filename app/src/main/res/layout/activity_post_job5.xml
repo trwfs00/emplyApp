@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PostJob5Activity">
-
+    <TextView
+        android:id="@+id/txtCheckValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentRight="true"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -87,34 +92,21 @@
                 android:textColor="@color/font_dark"
                 android:layout_marginTop="18dp"/>
 
-            <LinearLayout
-                android:id="@+id/Currency"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lCurrency"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/rounded_box">
-                <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:hint="Currency">
+
+                <AutoCompleteTextView
+                    android:id="@+id/AutoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
-                    <ImageView
-                        android:id="@+id/currency_icon"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:padding="18dp"
-                        android:src="@drawable/arrowup"
-                        android:layout_alignParentEnd="true"/>
-                    <Spinner
-                        android:id="@+id/spinnerCurrency"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:prompt="@string/currency"
-                        android:textSize="16sp"
-                        android:paddingLeft="20dp"
-                        android:background="@drawable/rounded_box"
-                        android:layout_toLeftOf="@id/currency_icon"/>
-                </RelativeLayout>
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_box"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

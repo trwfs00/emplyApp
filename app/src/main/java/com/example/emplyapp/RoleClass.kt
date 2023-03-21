@@ -14,6 +14,6 @@ data class RoleClass(
     @SerializedName("username") val username: String,
 
     @Expose
-    @SerializedName("password") val password: String,
+    @SerializedName("password") val password: String
 )
 

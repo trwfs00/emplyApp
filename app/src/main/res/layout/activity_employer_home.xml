@@ -68,7 +68,7 @@
             android:layout_marginVertical="24dp"
             android:layout_below="@id/EmployerBar">
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSave"
+                android:id="@+id/btnPostjob"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="6dp"

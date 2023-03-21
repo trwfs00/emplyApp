@@ -12,9 +12,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
+class SearchActivity : AppCompatActivity(), SearchAdapter.onItemClickListener {
     private lateinit var bindingSearchActivity: ActivitySearchBinding
-    private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
 
     private var SearchList = ArrayList<SearchClass>()
@@ -25,16 +24,15 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
         bindingSearchActivity = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(bindingSearchActivity.root)
 
-        recyclerView = bindingSearchActivity.recyclerViewApp
         searchView = bindingSearchActivity.searchViewSearch
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
+
     }
 
     override fun onResume() {
         super.onResume()
-        callCountryData()
         setupSearchView()
+        callJobData()
+
     }
 
     private fun setupSearchView() {
@@ -44,17 +42,23 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                fetchUsers(newText)
+                if (newText.isEmpty()) {
+                    callJobData()
+                    bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
+                } else {
+                    fetchJobs(newText)
+                    bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
+                }
                 return true
             }
 
         })
     }
 
-    fun callCountryData() {
+    fun callJobData() {
         SearchList.clear()
         searchClient.getAllSearch()
-            .enqueue(object : retrofit2.Callback<List<SearchClass>> {
+            .enqueue(object : Callback<List<SearchClass>> {
                 override fun onResponse(
                     call: Call<List<SearchClass>>,
                     response: Response<List<SearchClass>>
@@ -62,7 +66,9 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
                     response.body()?.forEach {
                         SearchList.add(SearchClass(it.job_name, it.company_name, it.country_name, it.state, it.salaryFrom, it.salaryTo, it.type, it.description, it.minimumQualification, it.benefit))
                     }
-                    bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList, this@SearchActivity, applicationContext)
+                    bindingSearchActivity.recyclerViewApp.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+                    bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList, this@SearchActivity ,applicationContext)
+                    bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
                 }
 
                 override fun onFailure(call: Call<List<SearchClass>>, t: Throwable) {
@@ -72,7 +78,7 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
             })
     }
 
-    fun fetchUsers(key: String) {
+    fun fetchJobs(key: String) {
         SearchList.clear()
         if (bindingSearchActivity.searchViewSearch.isNotEmpty()) {
             searchClient.getSearch(key)
@@ -84,7 +90,9 @@ class SearchActivity : AppCompatActivity(), CountryAdapter.onItemClickListener {
                         response.body()?.forEach {
                             SearchList.add(SearchClass(it.job_name, it.company_name, it.country_name, it.state, it.salaryFrom, it.salaryTo, it.type, it.description, it.minimumQualification, it.benefit))
                         }
-                        bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList, this@SearchActivity, applicationContext)
+                        bindingSearchActivity.recyclerViewApp.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+                        bindingSearchActivity.recyclerViewApp.adapter = SearchAdapter(SearchList, this@SearchActivity ,applicationContext)
+                        bindingSearchActivity.result.text = SearchList.size.toString() + " Found"
                     }
 
                     override fun onFailure(call: Call<List<SearchClass>>, t: Throwable) {

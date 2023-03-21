@@ -7,10 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface SearchAPI {
-    @GET("/all-search")
+    @GET("/all-jobs")
     fun getAllSearch(): Call<List<SearchClass>>
 
-    @GET("/search/{key}")
+    @GET("/all-jobs/{key}")
     fun getSearch(
         @Path("key")key: String
     ): Call<List<SearchClass>>

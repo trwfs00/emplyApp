@@ -7,11 +7,16 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface CategoryAPI {
+    @GET("all-category-names")
+    fun getAllCategory(): Call<List<CategoryClass>>
+
+    @GET("/category-names/{key}")
+    fun getCategoryKey(
+        @Path("key")key: String
+    ): Call<List<CategoryClass>>
+
     @GET("category-names")
     fun getCategory(): Call<List<CategoryClass>>
-
-    @GET("/all-category")
-    fun getAllCategory(): Call<List<CategoryClass>>
 
     @GET("/category/{key}")
     fun getCategory(
