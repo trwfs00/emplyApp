@@ -117,4 +117,71 @@
             </LinearLayout>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
+    <RelativeLayout
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jobCardView"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:id="@+id/JobDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Description :"
+            android:textColor="#2F3B46"
+            android:textSize="18sp"
+            android:textStyle="normal"/>
+        <TextView
+            android:id="@+id/Minimum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/JobDescription"
+            android:text="Minimum Qualifications :"
+            android:textColor="@color/font_dark"
+            android:textSize="18sp"
+            android:textStyle="normal"/>
+        <TextView
+            android:id="@+id/Benefits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Minimum"
+            android:text="Perks and Benefits :"
+            android:textColor="@color/font_dark"
+            android:textSize="18sp"
+            android:textStyle="normal"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/category"
+        android:layout_below="@id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/groupTxt_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/font_grey"
+                android:text="Category"
+                android:layout_alignParentStart="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/groupTxt_category">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                android:orientation="horizontal"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="1"
+                tools:listitem="@layout/category_item_layout" />
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>
