@@ -51,7 +51,19 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.btnPrivacyPolicy.setOnClickListener{
-            var i: Intent = Intent(applicationContext, EditProfileActivity::class.java)
+            var i: Intent = Intent(applicationContext, About1Activity::class.java)
+            startActivity(i)
+            finish()
+        }
+
+        binding.btnTermService.setOnClickListener{
+            var i: Intent = Intent(applicationContext, About2Activity::class.java)
+            startActivity(i)
+            finish()
+        }
+
+        binding.btnAboutUs.setOnClickListener{
+            var i: Intent = Intent(applicationContext, About3Activity::class.java)
             startActivity(i)
             finish()
         }

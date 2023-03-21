@@ -8,13 +8,11 @@ import com.example.emplyapp.databinding.ActivityAbout1Binding
 
 class About1Activity : AppCompatActivity() {
     private lateinit var bindingAbout1: ActivityAbout1Binding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         bindingAbout1 = ActivityAbout1Binding.inflate(layoutInflater)
         setContentView(bindingAbout1.root)
-
 
     }
 }

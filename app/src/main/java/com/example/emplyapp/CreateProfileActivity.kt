@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.ActivityCreateProfileBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,7 +59,7 @@ class CreateProfileActivity : AppCompatActivity() {
             }
         }
 
-        binding.edtProfile.setOnClickListener {
+        binding.imgProfile.setOnClickListener {
             showInputDialog()
         }
 
@@ -149,8 +150,15 @@ class CreateProfileActivity : AppCompatActivity() {
             .setView(editText)
             .setPositiveButton("OK") { dialogInterface, i ->
                 val inputText = editText.text.toString()
-                KEY_IMAGE_PATH = inputText
-                Toast.makeText(applicationContext, "You entered: $inputText", Toast.LENGTH_SHORT).show()
+                if (isValidImageUrl(inputText)) {
+                    KEY_IMAGE_PATH = inputText
+                    Glide.with(applicationContext)
+                        .load(KEY_IMAGE_PATH)
+                        .into(binding.imgProfile)
+                    Toast.makeText(applicationContext, "You entered: $inputText", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, "Invalid image URL", Toast.LENGTH_SHORT).show()
+                }
             }
             .setNegativeButton("Cancel") { dialogInterface, i ->
                 dialogInterface.cancel()
@@ -158,6 +166,11 @@ class CreateProfileActivity : AppCompatActivity() {
 
         val alertDialog = dialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun isValidImageUrl(url: String): Boolean {
+        val pattern = ".*\\.(jpg|jpeg|png|gif|bmp)".toRegex()
+        return pattern.matches(url)
     }
 
     private fun callDataUserId(username: String) {

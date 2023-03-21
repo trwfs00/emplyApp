@@ -1,5 +1,6 @@
 package com.example.emplyapp
 
+import android.provider.ContactsContract.Profile
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -41,6 +42,15 @@ interface UserAPI {
         @Field("country_id") country_id: Int,
         @Field("picture") picture: String
     ):Call<Jobseeker>
+
+    @FormUrlEncoded
+    @PUT("profile/{Login_id}")
+    fun editProfile(
+        @Field("fullName") fullName: String,
+        @Field("nickName") nickName: String,
+        @Field("birthday") birthday: String,
+        @Path("Login_id") Login_id: Int
+    ):Call<ProfileClass>
 
     @FormUrlEncoded
     @POST("employer")

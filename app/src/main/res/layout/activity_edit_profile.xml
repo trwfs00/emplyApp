@@ -36,20 +36,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleBar">
-        <ImageView
-            android:id="@+id/edtProfile"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@drawable/edit_profile"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/idCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
-            android:layout_centerHorizontal="true"/>
-        <View
-            android:id="@+id/lineBold"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@id/edtProfile"
-            android:layout_marginTop="28dp"
-            android:background="@color/font_inbox" />
+            app:cardCornerRadius="100dp">
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/edit_profile" />
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/fullName"
@@ -63,7 +62,7 @@
             android:text="Full Name"
             android:layout_marginTop="28dp"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt"
+            android:id="@+id/edtFullname"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/rounded_box"
@@ -123,5 +122,5 @@
         android:text="Save"
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/font_inbox" />
+        android:textColor="@color/white"/>
 </RelativeLayout>
