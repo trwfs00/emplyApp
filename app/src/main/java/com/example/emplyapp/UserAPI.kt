@@ -44,6 +44,14 @@ interface UserAPI {
     @GET("fetch/{username}")
     fun fetchUserData(@Path("username") username: String): Call<UserDataClass>
 
+    @PUT("jobseeker/delete/{Login_id}")
+    fun softDeleteJobseeker(
+        @Path("Login_id") Login_id: Int): Call<UserDataClass>
+
+    @PUT("employer/delete/{Login_id}")
+    fun softDeleteEmployer(
+        @Path("Login_id") Login_id: Int): Call<UserDataClass>
+
     @FormUrlEncoded
     @POST("jobseeker")
     fun insertProfile(

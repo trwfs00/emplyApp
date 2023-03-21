@@ -232,17 +232,59 @@
             android:layout_height="1dp"
             android:layout_below="@id/btn_about_us"
             android:background="@color/font_inbox"/>
+        <RelativeLayout
+            android:id="@+id/btn_deactivate"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_below="@id/lineNormal2">
 
-        <androidx.appcompat.widget.AppCompatButton
+            <ImageView
+                android:id="@+id/icon_deactivate"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/deactivate_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deactivate My Account"
+                android:textSize="18sp"
+                android:textColor="#EB4335"
+                android:layout_toRightOf="@id/icon_deactivate"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/arrow_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/lineNormal2"
-            android:layout_marginVertical="30dp"
-            android:background="@drawable/rounded_red_box"
-            android:text="Sign out"
-            android:textAllCaps="false"
-            android:textColor="@color/font_white" />
+            android:layout_height="58dp"
+            android:layout_below="@id/btn_deactivate">
+            <ImageView
+                android:id="@+id/icon_logout"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/logout_icon" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textSize="18sp"
+                android:textColor="#EB4335"
+                android:layout_toRightOf="@id/icon_logout"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottom_nav"
