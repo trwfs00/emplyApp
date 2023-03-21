@@ -39,16 +39,23 @@ class EditProfileActivity : AppCompatActivity() {
         KEY_USERNAME?.let { getUserData(it) }
 
         binding.btnSave.setOnClickListener {
+            var KEY_EDIT_FULLNAME = binding.edtFullname.text.toString()
+            var KEY_EDIT_NICKNAME = binding.edtNickname.text.toString()
+            var KEY_EDIT_BIRTHDAY = binding.edtDateBirthday.text.toString()
             KEY_USERNAME?.let { getUserData(it) }
             if (KEY_ROLE == 0){
                 createClient.editJobseeker(
-                    fullName = KEY_FULLNAME.toString(),
-                    nickName = KEY_NICKNAME.toString(),
-                    birthday = KEY_BIRTHDAY.toString(),
+                    fullName = KEY_EDIT_FULLNAME,
+                    nickName = KEY_EDIT_NICKNAME,
+                    birthday = KEY_EDIT_BIRTHDAY,
+                    picture_jobseek = KEY_PICTURE.toString(),
                     Login_id = KEY_LOGIN_ID!!
                 ).enqueue(object : Callback<ProfileClass>{
-                    override fun onResponse(call: Call<ProfileClass>, response: Response<ProfileClass>) {
-                        Toast.makeText(applicationContext,"${binding.edtFullname} ${binding.edtNickname}",Toast.LENGTH_LONG).show()
+                    override fun onResponse(
+                        call: Call<ProfileClass>,
+                        response: Response<ProfileClass>
+                    ) {
+                        Toast.makeText(applicationContext,"$KEY_EDIT_FULLNAME $KEY_EDIT_NICKNAME",Toast.LENGTH_LONG).show()
                         if (response.isSuccessful){
                             Toast.makeText(
                                 applicationContext,
@@ -56,12 +63,12 @@ class EditProfileActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             )
                                 .show()
-                            /*val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
-                            startActivity(i)*/
+                            val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
+                            startActivity(i)
                         }else{
                             Toast.makeText(
                                 applicationContext,
-                                "Failed to update data.",
+                                "Failed update.",
                                 Toast.LENGTH_LONG
                             )
                                 .show()
@@ -77,6 +84,7 @@ class EditProfileActivity : AppCompatActivity() {
                     fullName = KEY_FULLNAME.toString(),
                     nickName = KEY_NICKNAME.toString(),
                     birthday = KEY_BIRTHDAY.toString(),
+                    picture_emp = KEY_PICTURE.toString(),
                     Login_id = KEY_LOGIN_ID!!
                 ).enqueue(object : Callback<ProfileClass>{
                     override fun onResponse(call: Call<ProfileClass>, response: Response<ProfileClass>) {

@@ -49,6 +49,7 @@ interface UserAPI {
         @Field("fullName") fullName: String,
         @Field("nickName") nickName: String,
         @Field("birthday") birthday: String,
+        @Field("picture_jobseek") picture_jobseek: String,
         @Path("Login_id") Login_id: Int
     ):Call<ProfileClass>
 
@@ -58,6 +59,7 @@ interface UserAPI {
         @Field("fullName") fullName: String,
         @Field("nickName") nickName: String,
         @Field("birthday") birthday: String,
+        @Field("picture_emp") picture_emp: String,
         @Path("Login_id") Login_id: Int
     ):Call<ProfileClass>
 
