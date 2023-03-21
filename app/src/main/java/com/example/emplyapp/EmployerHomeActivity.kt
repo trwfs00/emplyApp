@@ -41,6 +41,12 @@ class EmployerHomeActivity : AppCompatActivity() {
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
         KEY_USERNAME?.let { getUserData(it) }
 
+        binding.btnPostjob.setOnClickListener {
+            var i: Intent = Intent(applicationContext, PostJob1Activity::class.java)
+            startActivity(i)
+            finish()
+        }
+
         binding.bottomNav.selectedItemId = R.id.home
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {

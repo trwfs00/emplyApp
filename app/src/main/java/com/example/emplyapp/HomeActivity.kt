@@ -132,7 +132,7 @@ class HomeActivity : AppCompatActivity() {
                     response: Response<List<CategoryClass>>,
                 ) {
                     response.body()?.forEach {
-                        categoryList.add(CategoryClass(it.category_name))
+                        categoryList.add(CategoryClass(it.category_id,it.category_name))
                     }
                     binding.recyclerCategory.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
                     binding.recyclerCategory.adapter = CategoryNameAdapter(categoryList, applicationContext)
