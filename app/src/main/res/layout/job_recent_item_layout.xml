@@ -36,6 +36,7 @@
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/jobName"
+                android:singleLine="true"
                 android:text="Jobs"
                 android:textSize="15sp"
                 android:textColor="@color/font_dark"

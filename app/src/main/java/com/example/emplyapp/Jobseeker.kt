@@ -31,5 +31,5 @@ data class Jobseeker(
     @SerializedName("country_id") val country_id: Int,
 
     @Expose
-    @SerializedName("picture") val picture: String
+    @SerializedName("picture_jobseek") val picture_jobseek: String
 )

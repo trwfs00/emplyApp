@@ -68,14 +68,19 @@ class MainActivity : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
                             } else {
-                                val id_back = response.body()?.userid.toString()
-                                val username_back = response.body()?.username.toString()
+                                if(response.body()?.deleted_at.isNullOrEmpty()) {
+                                    val id_back = response.body()?.userid.toString()
+                                    val username_back = response.body()?.username.toString()
 
-                                session.createLoginSession(username_back, id_back, username)
-                                var i: Intent =
-                                    Intent(applicationContext, HomeActivity::class.java)
-                                startActivity(i)
-                                finish()
+                                    session.createLoginSession(username_back, id_back, username)
+                                    var i: Intent =
+                                        Intent(applicationContext, HomeActivity::class.java)
+                                    i.putExtra("username", username_back)
+                                    startActivity(i)
+                                    finish()
+                                } else {
+                                    Toast.makeText(applicationContext,"This account doesn't exist.",Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
 
@@ -104,14 +109,19 @@ class MainActivity : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
                             } else {
-                                val id_back = response.body()?.userid.toString()
-                                val username_back = response.body()?.username.toString()
+                                if(response.body()?.deleted_at.isNullOrEmpty()) {
+                                    val id_back = response.body()?.userid.toString()
+                                    val username_back = response.body()?.username.toString()
 
-                                session.createLoginSession(username_back, id_back, username)
-                                var i: Intent =
-                                    Intent(applicationContext, EmployerHomeActivity::class.java)
-                                startActivity(i)
-                                finish()
+                                    session.createLoginSession(username_back, id_back, username)
+                                    var i: Intent =
+                                        Intent(applicationContext, EmployerHomeActivity::class.java)
+                                    i.putExtra("username", username_back)
+                                    startActivity(i)
+                                    finish()
+                                } else {
+                                    Toast.makeText(applicationContext,"This account doesn't exist.",Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
 

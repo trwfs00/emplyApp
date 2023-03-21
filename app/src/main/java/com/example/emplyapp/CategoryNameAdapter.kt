@@ -38,10 +38,10 @@ class CategoryNameAdapter(val categoryList: ArrayList<CategoryClass>, val contex
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.bindingCat
-        binding.jobCategory.text = categoryList!![position].category_name
+        binding.jobCategory.text = categoryList[position].category_name
     }
 
     override fun getItemCount(): Int {
-        return categoryList!!.size
+        return categoryList.size
     }
 }
