@@ -44,6 +44,9 @@ data class UserDataClass(
     @SerializedName("picture_emp") val picture_emp: String,
 
     @Expose
+    @SerializedName("employer_id") val employer_id: Int,
+
+    @Expose
     @SerializedName("empcard") val empcard: String,
 
     @Expose

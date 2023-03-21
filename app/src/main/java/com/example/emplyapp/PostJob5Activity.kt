@@ -40,6 +40,7 @@ class PostJob5Activity : AppCompatActivity() {
     var KEY_DEPT : String? = null
     var KEY_COMPANY_ID : Int? = null
     var KEY_STATUS : Int? = null
+    var KEY_EMPLOYER_ID : Int? = null
 
     var type: String = ""
     var CurrencyItem: String = ""
@@ -122,8 +123,9 @@ class PostJob5Activity : AppCompatActivity() {
                     KEY_DEPT = response.body()?.dept
                     KEY_COMPANY_ID = response.body()?.company_id
                     KEY_STATUS = response.body()?.status
+                    KEY_EMPLOYER_ID = response.body()?.employer_id
 
-                    bindingPJ5.txtCheckValue.text = bindingPJ5.txtCheckValue.text.toString()+" $KEY_USERNAME[ID:$KEY_LOGIN_ID}]"
+                    bindingPJ5.txtCheckValue.text = bindingPJ5.txtCheckValue.text.toString()+" $KEY_USERNAME[EMP-ID:$KEY_EMPLOYER_ID]"
                 } else {
                     Toast.makeText(applicationContext,"Failure on calling user data...", Toast.LENGTH_SHORT).show()
                 }
@@ -148,7 +150,7 @@ class PostJob5Activity : AppCompatActivity() {
             minimumQualification = KEY_QUALIFICATIONS.toString(),
             type = type,
             category_id = KEY_CATEGORY_ID.toString().toInt(),
-            employer_id = KEY_LOGIN_ID!!.toInt(),
+            employer_id = KEY_EMPLOYER_ID!!,
             benefit = KEY_PAB.toString(),
             code = CurrencyItem
             ).enqueue(object : Callback<JobsClass> {
@@ -156,7 +158,7 @@ class PostJob5Activity : AppCompatActivity() {
             override fun onResponse(call: Call<JobsClass>, response: Response<JobsClass>) {
                 if (response.isSuccessful) {
                     Toast.makeText(applicationContext, "Successfully Register", Toast.LENGTH_LONG).show()
-                    bindingPJ5.txtCheckValue.text = KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+KEY_LOGIN_ID+" "+KEY_PAB+" "+CurrencyItem
+                    bindingPJ5.txtCheckValue.text = KEY_NAME+" "+bindingPJ5.edtMin.text.toString().toInt()+" "+bindingPJ5.edtMax.text.toString().toInt()+" "+KEY_DESCRIPTION+" "+KEY_QUALIFICATIONS+" "+type+" "+KEY_CATEGORY_ID+" "+KEY_EMPLOYER_ID+" "+KEY_PAB+" "+CurrencyItem
                 } else {
                     Toast.makeText(applicationContext, "เข้า Insert เข้า else", Toast.LENGTH_SHORT).show()
                 }

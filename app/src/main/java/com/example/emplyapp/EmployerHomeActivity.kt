@@ -30,6 +30,7 @@ class EmployerHomeActivity : AppCompatActivity() {
     var KEY_DEPT : String? = null
     var KEY_COMPANY_ID : Int? = null
     var KEY_STATUS : Int? = null
+    var KEY_EMPLOYER_ID : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +98,7 @@ class EmployerHomeActivity : AppCompatActivity() {
                     KEY_DEPT = response.body()?.dept
                     KEY_COMPANY_ID = response.body()?.company_id
                     KEY_STATUS = response.body()?.status
+                    KEY_EMPLOYER_ID = response.body()?.employer_id
 
                     binding.txtUsername.text = response.body()?.fullName
 
