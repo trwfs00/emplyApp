@@ -190,12 +190,12 @@
                 android:textColor="@color/font_dark" />
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RececntJobs">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/JobRecentRycyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/RececntJobs"
                     android:layout_marginTop="5dp"
                     tools:itemCount="2"
                     tools:listitem="@layout/job_recent_item_layout"/>
