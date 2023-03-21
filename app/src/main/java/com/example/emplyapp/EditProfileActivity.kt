@@ -28,6 +28,7 @@ class EditProfileActivity : AppCompatActivity() {
     var KEY_GENDER : String? = null
     var KEY_COUNTRY_ID : Int? = null
     var KEY_PICTURE : String? = null
+    var KEY_NEW_PICTURE : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
@@ -36,30 +37,33 @@ class EditProfileActivity : AppCompatActivity() {
         session = SessionManager(applicationContext)
         // Read data from the preferences
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
-        KEY_USERNAME?.let { getUserData(it) }
+        getUserData(KEY_USERNAME.toString())
+
+        binding.imgProfile.setOnClickListener {
+            showInputDialog()
+        }
 
         binding.btnSave.setOnClickListener {
             var KEY_EDIT_FULLNAME = binding.edtFullname.text.toString()
             var KEY_EDIT_NICKNAME = binding.edtNickname.text.toString()
             var KEY_EDIT_BIRTHDAY = binding.edtDateBirthday.text.toString()
-            KEY_USERNAME?.let { getUserData(it) }
+            getUserData(KEY_USERNAME.toString())
             if (KEY_ROLE == 0){
                 createClient.editJobseeker(
                     fullName = KEY_EDIT_FULLNAME,
                     nickName = KEY_EDIT_NICKNAME,
                     birthday = KEY_EDIT_BIRTHDAY,
-                    picture_jobseek = KEY_PICTURE.toString(),
+                    picture_jobseek = if(KEY_NEW_PICTURE.isNullOrEmpty()) KEY_PICTURE.toString() else KEY_NEW_PICTURE.toString(),
                     Login_id = KEY_LOGIN_ID!!
                 ).enqueue(object : Callback<ProfileClass>{
                     override fun onResponse(
                         call: Call<ProfileClass>,
                         response: Response<ProfileClass>
                     ) {
-                        Toast.makeText(applicationContext,"$KEY_EDIT_FULLNAME $KEY_EDIT_NICKNAME",Toast.LENGTH_LONG).show()
                         if (response.isSuccessful){
                             Toast.makeText(
                                 applicationContext,
-                                "Successfully [JSK] updated",
+                                "Successfully updated",
                                 Toast.LENGTH_LONG
                             )
                                 .show()
@@ -81,23 +85,22 @@ class EditProfileActivity : AppCompatActivity() {
                 })
             }else if (KEY_ROLE == 1) {
                 createClient.editEmployer(
-                    fullName = KEY_FULLNAME.toString(),
-                    nickName = KEY_NICKNAME.toString(),
-                    birthday = KEY_BIRTHDAY.toString(),
-                    picture_emp = KEY_PICTURE.toString(),
+                    fullName = KEY_EDIT_FULLNAME,
+                    nickName = KEY_EDIT_NICKNAME,
+                    birthday = KEY_EDIT_BIRTHDAY,
+                    picture_emp = if(KEY_NEW_PICTURE.isNullOrEmpty()) KEY_PICTURE.toString() else KEY_NEW_PICTURE.toString(),
                     Login_id = KEY_LOGIN_ID!!
                 ).enqueue(object : Callback<ProfileClass>{
                     override fun onResponse(call: Call<ProfileClass>, response: Response<ProfileClass>) {
-                        Toast.makeText(applicationContext,"${binding.edtFullname} ${binding.edtNickname}",Toast.LENGTH_LONG).show()
                         if (response.isSuccessful){
                             Toast.makeText(
                                 applicationContext,
-                                "Successfully [EMP] updated",
+                                "Successfully updated",
                                 Toast.LENGTH_LONG
                             )
                                 .show()
-                            /*val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
-                            startActivity(i)*/
+                            val i: Intent = Intent(applicationContext, ProfileActivity::class.java)
+                            startActivity(i)
                         }else{
                             Toast.makeText(
                                 applicationContext,
@@ -130,7 +133,7 @@ class EditProfileActivity : AppCompatActivity() {
                     KEY_NICKNAME = response.body()?.nickName
                     KEY_GENDER = if(response.body()?.gender == 0) "Male" else "Female"
                     KEY_COUNTRY_ID = response.body()?.country_id
-                    KEY_PICTURE = response.body()?.picture_jobseek
+                    KEY_PICTURE = if(response.body()?.Login_role == 0) response.body()?.picture_jobseek else response.body()?.picture_emp
                     binding.edtFullname.hint = response.body()?.fullName
 
                     Glide.with(applicationContext)
@@ -156,9 +159,9 @@ class EditProfileActivity : AppCompatActivity() {
             .setPositiveButton("OK") { dialogInterface, i ->
                 val inputText = editText.text.toString()
                 if (isValidImageUrl(inputText)) {
-                    KEY_PICTURE = inputText
+                    KEY_NEW_PICTURE = inputText
                     Glide.with(applicationContext)
-                        .load(KEY_PICTURE)
+                        .load(KEY_NEW_PICTURE)
                         .into(binding.imgProfile)
                     Toast.makeText(applicationContext, "You entered: $inputText", Toast.LENGTH_SHORT).show()
                 } else {

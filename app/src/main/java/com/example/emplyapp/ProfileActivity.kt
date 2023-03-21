@@ -47,7 +47,6 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnPersonalInformation.setOnClickListener{
             var i: Intent = Intent(applicationContext, EditProfileActivity::class.java)
             startActivity(i)
-            finish()
         }
 
         binding.btnPrivacyPolicy.setOnClickListener{
