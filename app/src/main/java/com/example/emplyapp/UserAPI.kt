@@ -23,6 +23,15 @@ interface UserAPI {
     ):Call<JobsClass>
 
     @FormUrlEncoded
+    @POST("apply")
+    fun insertApply(
+        @Field("job_id") job_id: Int,
+        @Field("resume") resume: String,
+        @Field("motivation") motivation: String,
+        @Field("jobseeker_id") jobseeker_id: Int
+    ):Call<ApplyClass>
+
+    @FormUrlEncoded
     @POST("register")
     fun insertUser(
         @Field("username") username:String,
@@ -43,6 +52,9 @@ interface UserAPI {
 
     @GET("fetch/{username}")
     fun fetchUserData(@Path("username") username: String): Call<UserDataClass>
+
+    @GET("fetch/{username}")
+    fun fetchJobSeekData(@Path("username") username: String): Call<JobseekerClass>
 
     @PUT("jobseeker/delete/{Login_id}")
     fun softDeleteJobseeker(

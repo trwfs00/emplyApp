@@ -62,8 +62,6 @@ class ActivityJobDetail : AppCompatActivity() {
                     bindingJobDetail.CategoryDetail.text = SearchList[0].category_name
                     KEY_NAME_JOBS = SearchList[0].job_name.toString()
 
-
-                    Toast.makeText(applicationContext, SearchList[0].category_name.toString(), Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onFailure(call: Call<List<SearchClass>>, t: Throwable) {

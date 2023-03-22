@@ -43,7 +43,7 @@
             android:text="Full Name"
             android:layout_marginTop="30dp"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt"
+            android:id="@+id/edtFullName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/rounded_box"
@@ -64,7 +64,7 @@
             android:text="Email"
             android:layout_marginTop="20dp"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtNickname"
+            android:id="@+id/edtEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/rounded_box"
@@ -105,7 +105,7 @@
             android:text="Motivation Letter"
             android:layout_marginTop="20dp"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtDateBirthday"
+            android:id="@+id/edtMotivationLetter"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:background="@drawable/rounded_box"
