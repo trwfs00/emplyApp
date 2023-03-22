@@ -31,8 +31,5 @@ class ApplicationAdapter(val applicationList: ArrayList<ApplicationClass>, val c
         binding.jobInc.text = "${applicationList!![position].company_name}"
         Glide.with(context).load(applicationList[position].logo).into(binding.imgJob)
 
-
-        // ใช้ Picasso สำหรับโหลดภาพจาก URL
-        //Picasso.get().load(app.iconUrl).into(holder.appIconImageView)
     }
 }
