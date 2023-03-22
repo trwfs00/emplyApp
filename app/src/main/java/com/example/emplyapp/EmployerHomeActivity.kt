@@ -56,6 +56,7 @@ class EmployerHomeActivity : AppCompatActivity() {
                 }
                 R.id.application -> {
                     val i: Intent = Intent(applicationContext, EmployerApplicationActivity::class.java)
+                    i.putExtra("KEY_EMPLOYER_ID" , KEY_EMPLOYER_ID.toString())
                     startActivity(i)
                     finish()
                     it.isChecked = true

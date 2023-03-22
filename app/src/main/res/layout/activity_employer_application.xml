@@ -68,14 +68,14 @@
                 android:textSize="16sp"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewApp"
+            android:id="@+id/recyclerViewAppEm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/searchBar"
             android:layout_marginTop="10dp"
             android:paddingBottom="10dp"
             android:scrollbars="vertical"
-            tools:listitem="@layout/application_item_layout" />
+            tools:listitem="@layout/application_employer_item_layout" />
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

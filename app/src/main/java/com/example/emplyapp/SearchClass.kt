@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchClass(
     @Expose
+    @SerializedName("job_id") val job_id : Int,
+
+    @Expose
     @SerializedName("job_name") val job_name : String? = null,
 
     @Expose
@@ -14,6 +17,9 @@ data class SearchClass(
 
     @Expose
     @SerializedName("country_name") val country_name : String? = null,
+
+    @Expose
+    @SerializedName("nicename") val nicename : String? = null,
 
     @Expose
     @SerializedName("state") val state : String? = null,
@@ -43,6 +49,8 @@ data class SearchClass(
     @SerializedName("logo") val logo : String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -59,9 +67,11 @@ data class SearchClass(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(job_id)
         parcel.writeString(job_name)
         parcel.writeString(company_name)
         parcel.writeString(country_name)
+        parcel.writeString(nicename)
         parcel.writeString(state)
         parcel.writeInt(salaryFrom)
         parcel.writeInt(salaryTo)

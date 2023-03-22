@@ -74,7 +74,11 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                fetchUsers(newText)
+                if (newText.isEmpty()) {
+                    callCountryData()
+                } else {
+                    fetchUsers(newText)
+                }
                 return true
             }
 
@@ -84,7 +88,7 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
     fun callCountryData() {
         CountryList.clear()
         createClient.getAllCountry()
-            .enqueue(object : retrofit2.Callback<List<CountryClass>> {
+            .enqueue(object : Callback<List<CountryClass>> {
                 override fun onResponse(
                     call: Call<List<CountryClass>>,
                     response: Response<List<CountryClass>>

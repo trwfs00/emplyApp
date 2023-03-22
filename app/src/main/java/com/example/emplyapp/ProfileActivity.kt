@@ -34,6 +34,7 @@ class ProfileActivity : AppCompatActivity() {
     var KEY_DEPT : String? = null
     var KEY_COMPANY_ID : Int? = null
     var KEY_STATUS : Int? = null
+    var KEY_EMPLOYER_ID : Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -82,6 +83,11 @@ class ProfileActivity : AppCompatActivity() {
                 }
                 R.id.application -> {
                     val i: Intent = Intent(applicationContext, if(KEY_ROLE != 1) ApplicationActivity::class.java else EmployerApplicationActivity::class.java)
+                    if (KEY_ROLE == 1) {
+                        i.putExtra("KEY_EMPLOYER_ID" , KEY_EMPLOYER_ID.toString())
+                        startActivity(i)
+                        finish()
+                    }
                     startActivity(i)
                     finish()
                 }
@@ -176,6 +182,10 @@ class ProfileActivity : AppCompatActivity() {
                     KEY_DEPT = response.body()?.dept
                     KEY_COMPANY_ID = response.body()?.company_id
                     KEY_STATUS = response.body()?.status
+
+                    if (KEY_ROLE == 1) {
+                        KEY_EMPLOYER_ID = response.body()?.employer_id
+                    }
 
                     binding.txtUsername.text = response.body()?.fullName
 

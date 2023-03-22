@@ -3,17 +3,25 @@ package com.example.emplyapp
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface SearchAPI {
-    @GET("/all-jobs")
+    @GET("all-jobs")
     fun getAllSearch(): Call<List<SearchClass>>
 
-    @GET("/all-jobs/{key}")
+    @GET("all-jobs/{key}")
     fun getSearch(
         @Path("key")key: String
     ): Call<List<SearchClass>>
+
+    @FormUrlEncoded
+    @POST("apply")
+    fun insertApply(
+        @Field("job_id") job_id: Int,
+        @Field("resume") resume: String,
+        @Field("motivation") motivation: String,
+        @Field("jobseeker_id") jobseeker_id: Int
+    ):Call<ApplyClass>
 
     companion object {
         fun create():SearchAPI {

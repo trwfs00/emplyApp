@@ -15,22 +15,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".JobActivity"
+            android:name=".Activity_applications_choose"
             android:exported="false" />
         <activity
-            android:name=".About3Activity"
-            android:exported="false" />
-        <activity
-            android:name=".About2Activity"
-            android:exported="false" />
-        <activity
-            android:name=".About1Activity"
-            android:exported="false" />
-        <activity
-            android:name=".EditProfileActivity"
+            android:name=".ActivityJobDetail"
             android:exported="false" />
         <activity
             android:name=".EmployerApplicationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ApplyJobActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
