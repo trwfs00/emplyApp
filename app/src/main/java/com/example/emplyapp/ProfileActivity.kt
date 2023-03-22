@@ -111,7 +111,7 @@ class ProfileActivity : AppCompatActivity() {
                                 val edit = session.edior
                                 edit.clear()
                                 edit.commit()
-                                var i: Intent = Intent(applicationContext, MainActivity::class.java)
+                                val i: Intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(i)
                                 finish()
                             } else {
@@ -136,7 +136,7 @@ class ProfileActivity : AppCompatActivity() {
                                 val edit = session.edior
                                 edit.clear()
                                 edit.commit()
-                                var i: Intent = Intent(applicationContext, MainActivity::class.java)
+                                val i: Intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(i)
                                 finish()
                             } else {
