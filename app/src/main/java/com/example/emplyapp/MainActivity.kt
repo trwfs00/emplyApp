@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
 
         session = SessionManager(applicationContext)
         if (session.isLoggedIn()) {
-            var role = session.pref.getString(SessionManager.KEY_ROLE, null)
-            if(role?.toInt() == 0) {
+            callDataUserId(session.pref.getString(SessionManager.KEY_USERNAME, null).toString())
+            if(KEY_ROLE?.toInt() == 0) {
                 var i: Intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(i)
                 finish()
-            } else if (role?.toInt() == 1) {
+            } else if (KEY_ROLE?.toInt() == 1) {
                 var i: Intent = Intent(applicationContext, EmployerHomeActivity::class.java)
                 startActivity(i)
                 finish()
@@ -111,9 +111,9 @@ class MainActivity : AppCompatActivity() {
                             } else {
                                 if(response.body()?.deleted_at.isNullOrEmpty()) {
                                     val id_back = response.body()?.userid.toString()
-                                    val role_back = response.body()?.Login_role.toString()
+                                    val username_back = response.body()?.username.toString()
 
-                                    session.createLoginSession(role_back, id_back, username)
+                                    session.createLoginSession(username_back, id_back, username)
                                     var i: Intent =
                                         Intent(applicationContext, EmployerHomeActivity::class.java)
                                     i.putExtra("username", username)
