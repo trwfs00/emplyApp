@@ -1,5 +1,6 @@
 package com.example.emplyapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -55,6 +56,7 @@ class ApplicationActivity : AppCompatActivity() {
 
 
 
+    @SuppressLint("SuspiciousIndentation")
     private fun callApplicationData(){
         applicationList.clear()
         val serv : ApplicationAPI = Retrofit.Builder()
@@ -72,7 +74,11 @@ class ApplicationActivity : AppCompatActivity() {
                         response: Response<List<ApplicationClass>>
                     ) {
                         response.body()?.forEach {
-                            applicationList.add(ApplicationClass(it.job_name,it.company_name,it.logo))
+                            applicationList.add(ApplicationClass(
+                                it.job_name,
+                                it.company_name,
+                                it.logo,
+                            ))
                         }
                         //set data to recyclerview
                         binding.recyclerViewApp.adapter = ApplicationAdapter(applicationList,applicationContext)

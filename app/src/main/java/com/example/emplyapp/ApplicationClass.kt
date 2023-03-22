@@ -11,5 +11,6 @@ data class ApplicationClass(
     @SerializedName("company_name") val company_name: String,
 
     @Expose
-    @SerializedName("logo") val logo: String) {}
+    @SerializedName("logo") val logo: String
+) {}
 
