@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".About3Activity">
+    tools:context=".DetailActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,26 +27,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About us"
+                android:text="Tips for You"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="16dp"
                 android:textColor="@color/font_dark"
                 android:layout_toRightOf="@id/btnBack"/>
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/titleBar"
-            android:layout_marginTop="10dp">
-            <ScrollView
+            android:layout_marginTop="10dp"
+            android:scrollbars="none">
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_us"/>
-            </ScrollView>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:text="@string/terms_of_service"/>
+        </ScrollView>
     </RelativeLayout>
 </RelativeLayout>

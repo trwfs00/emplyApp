@@ -43,6 +43,11 @@ class HomeActivity : AppCompatActivity() {
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
         KEY_USERNAME?.let { getUserData(it) }
 
+        binding.btnTipsForYou.setOnClickListener {
+            val i: Intent = Intent(applicationContext, DetailActivity::class.java)
+            startActivity(i)
+        }
+
         binding.txtUsername.text = KEY_USERNAME
         binding.txtUsername.setOnClickListener {
             getUserData(KEY_USERNAME!!)
