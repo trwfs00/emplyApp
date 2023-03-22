@@ -52,6 +52,7 @@ class CompanyActivity : AppCompatActivity() {
         KEY_COUNTRY_ID = intent.getStringExtra("country_id")
         KEY_IMAGE_PATH = intent.getStringExtra("image")
 
+        binding.edtCountry.setText(KEY_COUNTRY_ID)
         binding.img.setOnClickListener {
             showInputDialog()
         }
@@ -65,7 +66,7 @@ class CompanyActivity : AppCompatActivity() {
             if(KEY_COMPANY_NAME != null && KEY_COMPANY_COUNTRY != null && KEY_COMPANY_STATE != null && KEY_COMPANY_ADDRESS != null && KEY_COMPANY_IMAGE_PATH != null) {
                 createCompany.insertCompany(
                     company_name = KEY_COMPANY_NAME.toString(),
-                    country = KEY_COMPANY_COUNTRY.toString(),
+                    country_id = KEY_COUNTRY_ID!!.toInt(),
                     state = KEY_COMPANY_STATE.toString(),
                     address = KEY_COMPANY_ADDRESS.toString(),
                     logo = KEY_COMPANY_IMAGE_PATH.toString()
