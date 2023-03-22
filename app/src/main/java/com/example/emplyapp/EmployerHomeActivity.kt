@@ -1,18 +1,25 @@
 package com.example.emplyapp
 
+import AllPostClass
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.ActivityEmployerHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class EmployerHomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEmployerHomeBinding
     private lateinit var session: SessionManager
+    var jobrecentlist = arrayListOf<JobRecent>()
+    var allpostList = arrayListOf<AllPostClass>()
     val createClient = UserAPI.create()
 
     var KEY_LOGIN_ID : Int? = null
@@ -70,6 +77,16 @@ class EmployerHomeActivity : AppCompatActivity() {
             }
             true
         }
+        //Link to Recyclerview
+        binding.recyclerViewAllPost.adapter =
+            AllPostAdapter(this.allpostList, applicationContext)
+        binding.recyclerViewAllPost.layoutManager = LinearLayoutManager(applicationContext)
+        binding.recyclerViewAllPost.addItemDecoration(
+            DividerItemDecoration(
+                binding.recyclerViewAllPost.getContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
     override fun onResume() {
@@ -78,6 +95,9 @@ class EmployerHomeActivity : AppCompatActivity() {
         // Read data from the preferences
         KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null)
         KEY_USERNAME?.let { getUserData(it) }
+        callAllPostData()
+        callJobRecentData()
+
     }
     private fun getUserData(msg: String) {
         createClient.fetchUserData(
@@ -115,4 +135,82 @@ class EmployerHomeActivity : AppCompatActivity() {
             }
         })
     }
+    private fun callAllPostData(){
+        allpostList.clear()
+        val serv : AllPostAPI = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AllPostAPI ::class.java)
+        serv.getAllPost(
+            employer_id = 2
+        )
+            .enqueue(object : Callback<List<AllPostClass>> {
+                override fun onResponse(
+                    call: Call<List<AllPostClass>>,
+                    response: Response<List<AllPostClass>>,
+                ) {
+                    response.body()?.forEach {
+                        allpostList.add(AllPostClass(it.job_name, it.salaryFrom, it.salaryTo, it.type, it.logo, it.nicename, it.company_name))
+                    }
+                    binding.recyclerViewAllPost.layoutManager = LinearLayoutManager(applicationContext)
+                    binding.recyclerViewAllPost.adapter = AllPostAdapter(allpostList, applicationContext)
+                }
+
+                override fun onFailure(call: Call<List<AllPostClass>>, t: Throwable) {
+                    Toast.makeText(applicationContext,"Error onFailure" + t.message,Toast.LENGTH_LONG).show()
+                }
+
+            })
+    }
+
+    private fun callJobRecentData() {
+        jobrecentlist.clear()
+        val serv: JobRecentAPI = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(JobRecentAPI::class.java)
+        serv.getJobsRecent()
+            .enqueue(object : Callback<List<JobRecent>> {
+                override fun onResponse(
+                    call: Call<List<JobRecent>>,
+                    response: Response<List<JobRecent>>
+                ) {
+                    if (response.isSuccessful) {
+                        val list = response.body()
+                        if (list != null && list.isNotEmpty()) {
+                            jobrecentlist.addAll(list.sortedByDescending { it.created_at })
+
+                            binding.JobRecentRycyclerView.layoutManager =
+                                LinearLayoutManager(applicationContext)
+                            binding.JobRecentRycyclerView.adapter =
+                                JobRecentAdapter(jobrecentlist, applicationContext)
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "No job recent data found",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Error onResponse: " + response.message(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+
+                override fun onFailure(call: Call<List<JobRecent>>, t: Throwable) {
+                    Toast.makeText(
+                        applicationContext,
+                        "Error onFailure: " + t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+    }
+
 }
