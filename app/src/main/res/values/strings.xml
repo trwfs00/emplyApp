@@ -2,4 +2,78 @@
     <string name="app_name">emplyApp</string>
     <string name="gender">Gender</string>
     <string name="currency">Currency</string>
+    <string name="privacy_policy">
+            <p>At Emply, we value and respect the privacy of our users. This Privacy Policy explains how we collect, use, and disclose information when you use our mobile application [App Name]. By using the [App Name], you consent to the terms and conditions of this Privacy Policy.</p>
+            <h2>Collection and Use of Information</h2>
+            <p>We collect information about you when you use the [App Name]. This includes:</p>
+            <ul>
+                <li>Information you provide directly to us, such as your name, email address, and other contact information.</li>
+                <li>Information we collect automatically when you use the [App Name], such as your IP address, device type, browser type, and usage information.</li>
+            </ul>
+            <p>We may use the information we collect to:</p>
+            <ul>
+                <li>Provide and improve our services.</li>
+                <li>Communicate with you about our services, including sending you promotional messages and offers.</li>
+                <li>Monitor and analyze usage and trends.</li>
+                <li>Comply with legal obligations.</li>
+            </ul>
+            <h2>Sharing of Information</h2>
+            <p>We may share your information with third-party service providers who help us provide and improve our services. These service providers are contractually obligated to protect your information and are not authorized to use or disclose your information for any other purpose.</p>
+            <p>We may also share your information in the following circumstances:</p>
+            <ul>
+                <li>With your consent or at your direction.</li>
+                <li>In response to a subpoena, court order, or other legal request.</li>
+                <li>To protect our rights, property, or safety, or the rights, property, or safety of others.</li>
+                <li>In connection with a merger, acquisition, or other corporate transaction.</li>
+            </ul>
+            <h2>Data Security</h2>
+            <p>We take reasonable measures to protect your information from unauthorized access, disclosure, and misuse. However, no security measure is completely secure, and we cannot guarantee the security of your information.</p>
+            <h2>Your Choices</h2>
+            <p>You may update or correct the information we have about you by contacting us at [Contact Email]. You may also opt out of receiving promotional messages from us by following the instructions in those messages.</p>
+            <h2>Changes to this Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at [Contact Email].</p>
+    </string>
+    <string name="terms_of_service">
+            <p>By using the Emply mobile application, you agree to be bound by the following terms and conditions:</p>
+            <h2>Use of the Emply</h2>
+            <p>You may use Emply for lawful purposes only. You are solely responsible for the content you upload or transmit through Emply.</p>
+            <p>You may not use Emply to:</p>
+            <ul>
+                <li>Violate any applicable law or regulation.</li>
+                <li>Upload or transmit any content that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, libelous, invasive of another's privacy, hateful, or racially, ethnically, or otherwise objectionable.</li>
+                <li>Upload or transmit any content that infringes on any patent, trademark, trade secret, copyright, or other proprietary rights of any party.</li>
+                <li>Engage in any activity that interferes with or disrupts Emply or its servers.</li>
+                <li>Attempt to gain unauthorized access to Emply or its servers.</li>
+            </ul>
+            <h2>Intellectual Property</h2>
+            <p>Emply and its content, including but not limited to text, graphics, images, logos, and software, are the property of Emply and are protected by United States and international copyright, trademark, and other intellectual property laws.</p>
+            <p>You may not modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information, software, products, or services obtained from Emply without the prior written consent of Emply.</p>
+            <h2>Limitation of Liability</h2>
+            <p>Emply shall not be liable for any indirect, special, incidental, or consequential damages arising out of or in connection with the use or inability to use Emply, even if Emply has been advised of the possibility of such damages.</p>
+            <h2>Indemnification</h2>
+            <p>You agree to indemnify and hold Emply, its affiliates, officers, agents, and employees harmless from any claim or demand, including reasonable attorneys' fees, made by any third party due to or arising out of your use of Emply, your violation of these terms and conditions, or your violation of any rights of another.</p>
+            <h2>Termination</h2>
+            <p>Emply may terminate your access to Emply at any time, without notice, for any reason whatsoever. You may also terminate your use of Emply at any time by uninstalling the application.</p>
+            <h2>Changes to these Terms and Conditions</h2>
+            <p>Emply reserves the right to modify or update these terms and conditions at any time, without notice, by posting the updated terms and conditions on Emply. Your continued use of Emply after any such changes constitutes your acceptance of the new terms and conditions.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these terms and conditions, please contact us at [Contact Email].</p>
+    </string>
+    <string name="about_us">
+            <p>Emply is a job finder app designed to help job seekers find the perfect job and employers find the perfect candidate. With a user-friendly interface and advanced search features, Emply makes it easy to find and apply for jobs.</p>
+            <h2>Features</h2>
+            <ul>
+                <li>Search for jobs by location, job title, and company.</li>
+                <li>Save your favorite job listings.</li>
+                <li>Apply for jobs directly from the app.</li>
+                <li>Get notified when new jobs are posted.</li>
+                <li>Create a profile and upload your resume.</li>
+                <li>View job application history.</li>
+                <li>Contact employers directly through the app.</li>
+            </ul>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about Emply or need help using the app, please contact us at [Contact Email].</p>
+    </string>
 </resources>
