@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".ActivityJobDetail">
+
+    <RelativeLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            style="@style/Widget.AppCompat.ActionBar.TabText"
+            android:layout_width="38dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/backward_icon"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layoutBtnApply"
+        android:layout_below="@id/titleBar"
+        android:layout_marginTop="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/jobCardView"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="2dp"
+                app:strokeColor="#EDF3F8"
+                app:strokeWidth="3dp">
+
+                <RelativeLayout
+                    android:layout_width="350dp"
+                    android:layout_height="350dp"
+                    android:layout_centerHorizontal="true">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/jobImage"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="33dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/rounded_logo_job_box"
+                        android:visibility="visible"
+                        app:cardCornerRadius="123dp" />
+
+                    <TextView
+                        android:id="@+id/jobName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobImage"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="14dp"
+                        android:text="Jobs"
+                        android:textColor="#2F3B46"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/jobInc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobName"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="4dp"
+                        android:text="Inc."
+                        android:textColor="#009FFF"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/jobLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobInc"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="28dp"
+                        android:text="location"
+                        android:textColor="#55697A"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/jobSalary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobLocation"
+                        android:layout_centerHorizontal="true"
+                        android:text="Salary"
+                        android:textColor="#009FFF"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/jobSalary"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/jobType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/rounded_box"
+                            android:paddingHorizontal="10dp"
+                            android:text="Type1"
+                            android:textColor="#A1B3C2"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <RelativeLayout
+                android:id="@+id/Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/jobCardView"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/JobDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Job Description :"
+                    android:textColor="#2F3B46"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/JobDescriptionDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/JobDescription"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:text="Text"
+                    android:textColor="#2F3B46"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/Minimum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/JobDescriptionDetail"
+                    android:paddingTop="8dp"
+                    android:text="Minimum Qualifications :"
+                    android:textColor="@color/font_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/MinimumDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Minimum"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:text="Text"
+                    android:textColor="#2F3B46"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/Benefits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/MinimumDetail"
+                    android:paddingTop="8dp"
+                    android:text="Perks and Benefits :"
+                    android:textColor="@color/font_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/BenefitsDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Benefits"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:text="Text"
+                    android:textColor="#2F3B46"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/BenefitsDetail"
+                    android:paddingTop="8dp"
+                    android:text="Category"
+                    android:textColor="@color/font_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/CategoryDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Category"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:text="Text"
+                    android:textColor="#2F3B46"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/layoutBtnApply"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApply"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_max_primary_box"
+            android:text="Apply"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>

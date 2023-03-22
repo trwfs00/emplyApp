@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var session: SessionManager
     val createClient = UserAPI.create()
-    var KEY_ROLE :String? = null
-    var KEY_LOGIN_ID :String? = null
+    var KEY_ROLE: String? = null
+    var KEY_LOGIN_ID: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -22,12 +22,13 @@ class MainActivity : AppCompatActivity() {
 
         session = SessionManager(applicationContext)
         if (session.isLoggedIn()) {
-            callDataUserId(session.pref.getString(SessionManager.KEY_USERNAME, null).toString())
-            if(KEY_ROLE?.toInt() == 0) {
+
+            var role: String? = session.pref.getString(SessionManager.KEY_ROLE, null)
+            if (role!!.toInt() == 0) {
                 var i: Intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(i)
                 finish()
-            } else if (KEY_ROLE?.toInt() == 1) {
+            } else if (role!!.toInt() == 1) {
                 var i: Intent = Intent(applicationContext, EmployerHomeActivity::class.java)
                 startActivity(i)
                 finish()
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                                 ).show()
                             } else {
                                 val id_back = response.body()?.userid.toString()
-                                val username_back = response.body()?.username.toString()
+                                val username_back = response.body()?.Login_role.toString()
 
                                 session.createLoginSession(username_back, id_back, username)
                                 var i: Intent =
@@ -127,6 +128,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun callDataUserId(username: String) {
         createClient.getLoginId(
             username = username
@@ -136,10 +138,15 @@ class MainActivity : AppCompatActivity() {
                     KEY_LOGIN_ID = response.body()!!.Login_id.toString()
                     KEY_ROLE = response.body()!!.Login_role.toString()
                 } else {
-                    Toast.makeText(applicationContext, "Failed to find Login_role", Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        applicationContext,
+                        "Failed to find Login_role",
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
             }
+
             override fun onFailure(call: Call<RoleClass>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,
