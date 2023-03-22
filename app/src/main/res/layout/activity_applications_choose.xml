@@ -35,7 +35,7 @@
                 android:layout_toRightOf="@id/btnBack"/>
         </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewApp"
+            android:id="@+id/recyclerViewApply"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/titleBar"

@@ -1,5 +1,6 @@
 package com.example.emplyapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,8 @@ import com.example.emplyapp.databinding.ActivityApplicationsChooseBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class Activity_applications_choose : AppCompatActivity(), applications_chooseAdapter.onItemClickListener {
     private lateinit var binding : ActivityApplicationsChooseBinding
@@ -22,6 +25,8 @@ class Activity_applications_choose : AppCompatActivity(), applications_chooseAda
 
     var KEY_JOB_ID : String? = null
     var KEY_JOB_NAME : String? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +40,65 @@ class Activity_applications_choose : AppCompatActivity(), applications_chooseAda
         binding.txtTitle2.setText(KEY_JOB_NAME)
 
         //Link to Recyclerview
-        recyclerView = binding.recyclerViewApp
+        recyclerView = binding.recyclerViewApply
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
+
+
 
     }
 
     override fun onResume() {
         super.onResume()
+        callApplyJobssekerData()
     }
 
     override fun onClick(position: Int) {
-        TODO("Not yet implemented")
+        callApplyJobssekerData()
+    }
+
+    @SuppressLint("SuspiciousIndentation")
+    private fun callApplyJobssekerData(){
+        ActivityChooseList.clear()
+        val serv : ApplicationAPI = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApplicationAPI ::class.java)
+
+        KEY_JOB_ID?.toInt()?.let {
+            serv.getApplicationsApply(
+                job_id = it
+            )
+
+                .enqueue(object : Callback<List<ActivityChooseClass>> {
+                    override fun onResponse(
+                        call: Call<List<ActivityChooseClass>>,
+                        response: Response<List<ActivityChooseClass>>
+                    ) {
+                        response.body()?.forEach {
+                            ActivityChooseList.add(ActivityChooseClass(
+                                it.job_name,
+                                it.fullName,
+                                it.created_at,
+                                it.picture_jobseek,
+                            ))
+                        }
+                        //set data to recyclerview
+                        binding.recyclerViewApply.adapter = applications_chooseAdapter(ActivityChooseList,applicationContext,this@Activity_applications_choose)
+                    }
+
+
+                    override fun onFailure(call: Call<List<ActivityChooseClass>>, t: Throwable) {
+                        Toast.makeText(applicationContext,"Error onFailure" + t.message, Toast.LENGTH_LONG).show()
+                    }
+                })
+        }
     }
 }
+
+private fun <T> Call<T>.enqueue(callback: Callback<List<T>>) {
+
+}
+
+

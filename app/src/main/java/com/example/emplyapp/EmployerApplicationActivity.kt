@@ -77,7 +77,7 @@ class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdap
     fun callApplicationEmData() {
         appemList.clear()
 
-        val employer_id = KEY_EMPLOYER_ID.toString().toInt() // ตั้งค่า employerId ตามที่ต้องการเช็ค
+        val employer_id = KEY_EMPLOYER_ID!!.toInt() // ตั้งค่า employerId ตามที่ต้องการเช็ค
         if (employer_id > 0) {
             createApplicationData.getApplicationEmployer(
                 employer_id = employer_id

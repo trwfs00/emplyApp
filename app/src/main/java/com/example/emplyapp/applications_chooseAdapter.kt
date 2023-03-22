@@ -37,7 +37,7 @@ class applications_chooseAdapter(
 
         binding.JobName.text = ActivityChooseList!![position].fullName
         binding.jobDate.text = diffForHuman(ActivityChooseList!![position].created_at)
-        Glide.with(context).load(ActivityChooseList[position].picture_jobseek).into(binding.imgJob)
+        Glide.with(context).load(ActivityChooseList!![position].picture_jobseek).into(binding.imgJobSeek)
 
         holder.itemView.setOnClickListener {
             mListener.onClick(position)

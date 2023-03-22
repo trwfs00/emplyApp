@@ -120,7 +120,7 @@ interface UserAPI {
     @POST("company")
     fun insertCompany(
         @Field("company_name") company_name: String,
-        @Field("country") country: String,
+        @Field("country_id") country_id: Int,
         @Field("state") state: String,
         @Field("address") address: String,
         @Field("logo") logo: String

@@ -11,7 +11,7 @@ data class CompanyClass(
     @SerializedName("company_name") val company_name: String,
 
     @Expose
-    @SerializedName("country") val country: String,
+    @SerializedName("country_id") val country_id: Int,
 
     @Expose
     @SerializedName("state") val state: String,
