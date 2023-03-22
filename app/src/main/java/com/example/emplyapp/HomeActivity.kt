@@ -14,23 +14,23 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
     private lateinit var session: SessionManager
     var categoryList = arrayListOf<CategoryClass>()
     var jobrecentlist = arrayListOf<JobRecent>()
     val createClient = UserAPI.create()
 
-    var KEY_LOGIN_ID : Int? = null
-    var KEY_ROLE : Int? = null
-    var KEY_USERNAME : String? = null
-    var KEY_FULLNAME : String? = null
-    var KEY_EMAIL : String? = null
-    var KEY_PHONE : String? = null
-    var KEY_BIRTHDAY : String? = null
-    var KEY_NICKNAME : String? = null
-    var KEY_GENDER : String? = null
-    var KEY_COUNTRY_ID : Int? = null
-    var KEY_PICTURE : String? = null
+    var KEY_LOGIN_ID: Int? = null
+    var KEY_ROLE: Int? = null
+    var KEY_USERNAME: String? = null
+    var KEY_FULLNAME: String? = null
+    var KEY_EMAIL: String? = null
+    var KEY_PHONE: String? = null
+    var KEY_BIRTHDAY: String? = null
+    var KEY_NICKNAME: String? = null
+    var KEY_GENDER: String? = null
+    var KEY_COUNTRY_ID: Int? = null
+    var KEY_PICTURE: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
             binding.txtUsername.text = KEY_FULLNAME
         }
         binding.btnSearch.setOnClickListener {
-            val i : Intent = Intent(applicationContext, SearchActivity::class.java)
+            val i: Intent = Intent(applicationContext, SearchActivity::class.java)
             startActivity(i)
         }
 
@@ -92,7 +92,7 @@ class HomeActivity : AppCompatActivity() {
             username = msg
         ).enqueue(object : Callback<UserDataClass> {
             override fun onResponse(call: Call<UserDataClass>, response: Response<UserDataClass>) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     KEY_LOGIN_ID = response.body()?.Login_id
                     KEY_ROLE = response.body()?.Login_role
                     KEY_FULLNAME = response.body()?.fullName
@@ -100,7 +100,7 @@ class HomeActivity : AppCompatActivity() {
                     KEY_PHONE = response.body()?.phone
                     KEY_BIRTHDAY = response.body()?.birthday
                     KEY_NICKNAME = response.body()?.nickName
-                    KEY_GENDER = if(response.body()?.gender == 0) "Male" else "Female"
+                    KEY_GENDER = if (response.body()?.gender == 0) "Male" else "Female"
                     KEY_COUNTRY_ID = response.body()?.country_id
                     KEY_PICTURE = response.body()?.picture_jobseek
                     binding.txtUsername.text = response.body()?.fullName
@@ -109,22 +109,28 @@ class HomeActivity : AppCompatActivity() {
                         .load(KEY_PICTURE)
                         .into(binding.imgUser)
                 } else {
-                    Toast.makeText(applicationContext,"Failure on calling user data...",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Failure on calling user data...",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+
             override fun onFailure(call: Call<UserDataClass>, t: Throwable) {
-                Toast.makeText(applicationContext,"Failed on "+t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Failed on " + t.message, Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
 
-    private fun callCategoryData(){
+    private fun callCategoryData() {
         categoryList.clear()
-        val serv : CategoryAPI = Retrofit.Builder()
+        val serv: CategoryAPI = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(CategoryAPI ::class.java)
+            .create(CategoryAPI::class.java)
         serv.getCategory()
             .enqueue(object : Callback<List<CategoryClass>> {
                 override fun onResponse(
@@ -132,43 +138,75 @@ class HomeActivity : AppCompatActivity() {
                     response: Response<List<CategoryClass>>,
                 ) {
                     response.body()?.forEach {
-                        categoryList.add(CategoryClass(it.category_id,it.category_name))
+                        categoryList.add(CategoryClass(it.category_id, it.category_name))
                     }
-                    binding.recyclerCategory.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
-                    binding.recyclerCategory.adapter = CategoryNameAdapter(categoryList, applicationContext)
+                    binding.recyclerCategory.layoutManager = LinearLayoutManager(
+                        applicationContext,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    binding.recyclerCategory.adapter =
+                        CategoryNameAdapter(categoryList, applicationContext)
                 }
 
                 override fun onFailure(call: Call<List<CategoryClass>>, t: Throwable) {
-                    Toast.makeText(applicationContext,"Error onFailure" + t.message,Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Error onFailure" + t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
             })
     }
 
-    private fun callJobRecentData(){
+    private fun callJobRecentData() {
         jobrecentlist.clear()
-        val serv : JobRecentAPI = Retrofit.Builder()
+        val serv: JobRecentAPI = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:3000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(JobRecentAPI ::class.java)
+            .create(JobRecentAPI::class.java)
         serv.getJobsRecent()
             .enqueue(object : Callback<List<JobRecent>> {
                 override fun onResponse(
                     call: Call<List<JobRecent>>,
-                    response: Response<List<JobRecent>>,
+                    response: Response<List<JobRecent>>
                 ) {
-                    response.body()?.forEach {
-                        jobrecentlist.add(JobRecent(it.job_name,it.company_name,it.nicename,it.type,it.logo,it.created_at))
+                    if (response.isSuccessful) {
+                        val list = response.body()
+                        if (list != null && list.isNotEmpty()) {
+                            jobrecentlist.addAll(list.sortedByDescending { it.created_at })
+
+                            binding.JobRecentRycyclerView.layoutManager =
+                                LinearLayoutManager(applicationContext)
+                            binding.JobRecentRycyclerView.adapter =
+                                JobRecentAdapter(jobrecentlist, applicationContext)
+                        } else {
+                            Toast.makeText(
+                                applicationContext,
+                                "No job recent data found",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Error onResponse: " + response.message(),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                    binding.JobRecentRycyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                    binding.JobRecentRycyclerView.adapter = JobRecentAdapter(jobrecentlist, applicationContext)
                 }
+
 
                 override fun onFailure(call: Call<List<JobRecent>>, t: Throwable) {
-                    Toast.makeText(applicationContext,"Error onFailure" + t.message,Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Error onFailure: " + t.message,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-
             })
     }
+
 }
