@@ -118,6 +118,10 @@ class EmployerHomeActivity : AppCompatActivity() {
                     KEY_DEPT = response.body()?.dept
                     KEY_COMPANY_ID = response.body()?.company_id
                     KEY_STATUS = response.body()?.status
+
+                    KEY_EMPLOYER_ID = response.body()?.employer_id
+                    KEY_EMPLOYER_ID = response.body()?.employer_id
+                    KEY_EMPLOYER_ID = response.body()?.employer_id
                     KEY_EMPLOYER_ID = response.body()?.employer_id
 
                     binding.txtUsername.text = response.body()?.fullName
@@ -135,6 +139,8 @@ class EmployerHomeActivity : AppCompatActivity() {
         })
     }
     private fun callAllPostData(){
+        getUserData(KEY_USERNAME.toString())
+        getUserData(KEY_USERNAME.toString())
         allpostList.clear()
         val serv : AllPostAPI = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:3000/")
@@ -142,7 +148,7 @@ class EmployerHomeActivity : AppCompatActivity() {
             .build()
             .create(AllPostAPI ::class.java)
         serv.getAllPost(
-            employer_id = 2
+            employer_id = if(KEY_EMPLOYER_ID == null) 2 else KEY_EMPLOYER_ID!!
         )
             .enqueue(object : Callback<List<AllPostClass>> {
                 override fun onResponse(
