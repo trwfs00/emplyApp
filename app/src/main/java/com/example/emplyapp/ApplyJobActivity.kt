@@ -153,7 +153,7 @@ class ApplyJobActivity : AppCompatActivity() {
         createUserData.insertApply(
             job_id = KEY_JOB_ID.toString().toInt(),
             resume = PDF_PATH.toString(),
-            motivation = binding.edtMotivationLetter.toString(),
+            motivation = binding.edtMotivationLetter.text.toString(),
             jobseeker_id = KEY_JOBSEEK_ID.toString().toInt()
         ).enqueue(object : Callback<ApplyClass> {
             override fun onResponse(call: Call<ApplyClass>, response: Response<ApplyClass>) {

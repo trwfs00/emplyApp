@@ -11,26 +11,38 @@ import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.ApplicationEmployerItemLayoutBinding
 import com.example.emplyapp.databinding.ApplicationItemLayoutBinding
 
-class ApplicationEmployerAdapter(private val appemList: List<ApplicationEmployerClass>, private val context: Context) : RecyclerView.Adapter<ApplicationEmployerAdapter.ViewHolder>() {
+class ApplicationEmployerAdapter(
+    private val appemList: List<ApplicationEmployerClass>,
+    private val context: Context,
+    var mListener: EmployerApplicationActivity
+    ) : RecyclerView.Adapter<ApplicationEmployerAdapter.ViewHolder>() {
 
     class ViewHolder(view: View, val binding: ApplicationEmployerItemLayoutBinding) :
         RecyclerView.ViewHolder(view) {
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApplicationEmployerAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ApplicationEmployerItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding.root, binding)
     }
 
-    override fun onBindViewHolder(holder: ApplicationEmployerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding = holder.binding
         binding.jobEmName.text = appemList!![position].job_name
         binding.jobEmInc.text = appemList!![position].company_name
         Glide.with(context).load(appemList[position].logo).into(binding.imgEmJob)
         binding.jobEmCount.text = "${appemList!![position].applicationCount} apply"
+
+        holder.itemView.setOnClickListener {
+            mListener.onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
         return appemList!!.size
+    }
+
+    interface onItemClickListener {
+        fun onClick(position: Int)
     }
 }

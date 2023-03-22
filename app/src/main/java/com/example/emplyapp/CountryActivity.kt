@@ -74,7 +74,11 @@ class CountryActivity : AppCompatActivity(), CountryAdapter.onItemClickListener 
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                fetchUsers(newText)
+                if (newText.isEmpty()) {
+                    callCountryData()
+                } else {
+                    fetchUsers(newText)
+                }
                 return true
             }
 

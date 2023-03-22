@@ -14,7 +14,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class EmployerApplicationActivity : AppCompatActivity() {
+class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdapter.onItemClickListener {
     private lateinit var bindingEmployer: ActivityEmployerApplicationBinding
     var appemList = arrayListOf<ApplicationEmployerClass>()
     private val applicationCount = 0
@@ -48,7 +48,7 @@ class EmployerApplicationActivity : AppCompatActivity() {
 
         //Link to Recyclerview
         bindingEmployer.recyclerViewAppEm.adapter =
-            ApplicationEmployerAdapter(this.appemList, applicationContext)
+            ApplicationEmployerAdapter(this.appemList, applicationContext, this@EmployerApplicationActivity)
         bindingEmployer.recyclerViewAppEm.layoutManager = LinearLayoutManager(applicationContext)
         bindingEmployer.recyclerViewAppEm.addItemDecoration(
             DividerItemDecoration(
@@ -95,7 +95,7 @@ class EmployerApplicationActivity : AppCompatActivity() {
                         }
                         //set data to recyclerview
                         bindingEmployer.recyclerViewAppEm.adapter =
-                            ApplicationEmployerAdapter(appemList, applicationContext)
+                            ApplicationEmployerAdapter(appemList, applicationContext, this@EmployerApplicationActivity)
                     }
 
                     override fun onFailure(
@@ -112,5 +112,10 @@ class EmployerApplicationActivity : AppCompatActivity() {
         } else {
             Toast.makeText(applicationContext, "Invalid employer ID", Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onClick(position: Int) {
+        var intent: Intent = Intent(applicationContext, ActivityJobDetail::class.java)
+        startActivity(intent)
     }
 }
