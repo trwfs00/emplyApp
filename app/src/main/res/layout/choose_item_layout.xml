@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="28dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp">
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:id="@+id/imgJob"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rounded_logo_job_box"
+            android:visibility="visible"
+            app:cardCornerRadius="123dp"/>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="14dp"
+        android:layout_toEndOf="@id/idCardView">
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="272dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/JobName"
+            android:text="text"
+            android:textSize="20sp"
+            android:textColor="@color/font_dark"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="272dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/jobDate"
+            android:text="2 day ago"
+            android:textSize="12sp"
+            android:textColor="@color/font_grey"
+            android:layout_marginTop="3dp"
+            android:textStyle="normal"/>
+
+    </LinearLayout>
+</LinearLayout>

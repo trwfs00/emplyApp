@@ -9,12 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.emplyapp.databinding.ApplicationEmployerItemLayoutBinding
-import com.example.emplyapp.databinding.ApplicationItemLayoutBinding
 
 class ApplicationEmployerAdapter(
     private val appemList: List<ApplicationEmployerClass>,
     private val context: Context,
-    var mListener: EmployerApplicationActivity
+    private val mListener: EmployerApplicationActivity
     ) : RecyclerView.Adapter<ApplicationEmployerAdapter.ViewHolder>() {
 
     class ViewHolder(view: View, val binding: ApplicationEmployerItemLayoutBinding) :

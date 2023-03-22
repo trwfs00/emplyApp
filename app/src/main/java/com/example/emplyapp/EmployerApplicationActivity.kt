@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.emplyapp.databinding.ActivityEmployerApplicationBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,8 +17,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdapter.onItemClickListener {
     private lateinit var bindingEmployer: ActivityEmployerApplicationBinding
+    private lateinit var recyclerView: RecyclerView
+    lateinit var session: SessionManager
+
     var appemList = arrayListOf<ApplicationEmployerClass>()
     private val applicationCount = 0
+
+    val createApplicationData = ApplicationAPI.create()
+
+    var KEY_JOB_ID : String? = null
+    var KEY_JOB_NAME : String? = null
+    var KEY_USERNAME : String? = null
+    var KEY_EMPLOYER_ID : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +57,16 @@ class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdap
             true
         }
 
+        var intent: Intent = getIntent()
+        KEY_EMPLOYER_ID = intent.getStringExtra("KEY_EMPLOYER_ID")
+
+        session = SessionManager(applicationContext)
+        KEY_USERNAME = session.pref.getString(SessionManager.KEY_USERNAME, null).toString()
+
         //Link to Recyclerview
-        bindingEmployer.recyclerViewAppEm.adapter =
-            ApplicationEmployerAdapter(this.appemList, applicationContext, this@EmployerApplicationActivity)
-        bindingEmployer.recyclerViewAppEm.layoutManager = LinearLayoutManager(applicationContext)
-        bindingEmployer.recyclerViewAppEm.addItemDecoration(
-            DividerItemDecoration(
-                bindingEmployer.recyclerViewAppEm.getContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        recyclerView = bindingEmployer.recyclerViewAppEm
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
     }
 
     override fun onResume() {
@@ -63,18 +74,12 @@ class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdap
         callApplicationEmData()
     }
 
-    @SuppressLint("SuspiciousIndentation")
-    private fun callApplicationEmData() {
+    fun callApplicationEmData() {
         appemList.clear()
-        val serv: ApplicationAPI = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApplicationAPI::class.java)
 
-        val employer_id = 2 // ตั้งค่า employerId ตามที่ต้องการเช็ค
+        val employer_id = KEY_EMPLOYER_ID.toString().toInt() // ตั้งค่า employerId ตามที่ต้องการเช็ค
         if (employer_id > 0) {
-            serv.getApplicationEmployer(
+            createApplicationData.getApplicationEmployer(
                 employer_id = employer_id
             )
                 .enqueue(object : Callback<List<ApplicationEmployerClass>> {
@@ -85,10 +90,11 @@ class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdap
                         response.body()?.forEach {
                             appemList.add(
                                 ApplicationEmployerClass(
+                                    it.job_id,
                                     it.job_name,
                                     it.company_name,
                                     it.logo,
-                                    it.logo.toString(),
+                                    it.status,
                                     it.applicationCount
                                 )
                             )
@@ -115,7 +121,11 @@ class EmployerApplicationActivity : AppCompatActivity(), ApplicationEmployerAdap
     }
 
     override fun onClick(position: Int) {
-        var intent: Intent = Intent(applicationContext, ActivityJobDetail::class.java)
+        KEY_JOB_ID = appemList[position].job_id.toString()
+        KEY_JOB_NAME = appemList[position].job_name
+        var intent: Intent = Intent(applicationContext, Activity_applications_choose::class.java)
+        intent.putExtra("KEY_JOB_ID",KEY_JOB_ID)
+        intent.putExtra("KEY_JOB_NAME",KEY_JOB_NAME)
         startActivity(intent)
     }
 }
